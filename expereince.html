@@ -5,17 +5,335 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amirhossein Iranmehr | Experience</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:         #07090d;
+      --surface:    #0c1018;
+      --card:       #111620;
+      --border:     #1c2535;
+      --accent:     #00c8f0;
+      --accent-dim: rgba(0,200,240,.12);
+      --text:       #b8c8d8;
+      --heading:    #dde8f0;
+      --muted:      #546a7e;
+      --mono:       'Share Tech Mono', monospace;
+      --display:    'Syne', sans-serif;
+      --body-font:  'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-weight: 300;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,240,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,240,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(7,9,13,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .9rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .site-header h1 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -.01em;
+      white-space: nowrap;
+    }
+    .site-header h1 span { color: var(--accent); }
+    .subtitle { display: none; }
+
+    .navbar { display: flex; gap: .2rem; flex-wrap: wrap; }
+    .navbar a {
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: .38rem .8rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+    .navbar a:hover, .navbar a.active {
+      color: var(--accent);
+      border-color: var(--border);
+      background: var(--accent-dim);
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+    main.container { padding-top: 0; padding-bottom: 5rem; }
+
+    /* ── PAGE HEADING ── */
+    .page-heading {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      opacity: 0;
+      animation: fadeUp .5s .05s forwards;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 26px; height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .page-heading h2 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp .5s .15s forwards;
+    }
+    .page-heading h2 span { color: var(--accent); }
+    .page-heading p {
+      font-size: .95rem;
+      color: var(--muted);
+      max-width: 560px;
+      opacity: 0;
+      animation: fadeUp .5s .25s forwards;
+    }
+
+    /* ── TWO-COLUMN ── */
+    .two-column {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .column-label {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--accent);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .column-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── TIMELINE CARDS ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .tl-item {
+      position: relative;
+      padding-left: 1.8rem;
+      padding-bottom: 2.2rem;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .5s, transform .5s;
+    }
+    .tl-item.visible { opacity: 1; transform: none; }
+    .tl-item:last-child { padding-bottom: 0; }
+
+    /* Vertical line */
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 10px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .tl-item:last-child::before { display: none; }
+
+    /* Dot */
+    .tl-item::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .tl-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      transition: border-color .2s;
+    }
+    .tl-card:hover { border-color: rgba(0,200,240,.4); }
+
+    .tl-title {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: .3rem;
+    }
+    .tl-meta {
+      font-family: var(--mono);
+      font-size: .66rem;
+      color: var(--accent);
+      letter-spacing: .08em;
+      margin-bottom: .9rem;
+      line-height: 1.5;
+    }
+    .tl-card ul { list-style: none; }
+    .tl-card ul li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: .86rem;
+      color: var(--text);
+      margin-bottom: .3rem;
+      line-height: 1.6;
+    }
+    .tl-card ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── TEACHING CARD (special) ── */
+    .teach-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .5s, transform .5s, border-color .2s;
+    }
+    .teach-card.visible { opacity: 1; transform: none; }
+    .teach-card:hover { border-color: rgba(0,200,240,.4); }
+
+    .teach-label {
+      font-family: var(--mono);
+      font-size: .66rem;
+      color: var(--accent);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .teach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .4rem;
+    }
+    .teach-item {
+      font-size: .82rem;
+      color: var(--text);
+      padding: .4rem .65rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: rgba(0,200,240,.03);
+      transition: border-color .2s;
+    }
+    .teach-item:hover { border-color: rgba(0,200,240,.3); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      text-align: center;
+      padding: 1.8rem 2.5rem;
+    }
+    .site-footer p {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .two-column { grid-template-columns: 1fr; }
+      .teach-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 1.2rem; }
+      .site-header .container { padding: .8rem 1.2rem; }
+    }
+  </style>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container">
-      <h1>Amirhossein Iranmehr</h1>
-      <p class="subtitle">Experience</p>
-
+      <h1>Amirhossein <span>Iranmehr</span></h1>
       <nav class="navbar">
         <a href="index.html">Introduction</a>
-        <a href="experience.html" class="active">Experience</a>
+        <a href="expereince.html" class="active">Experience</a>
         <a href="projects.html">Projects</a>
         <a href="skills.html">Skills</a>
         <a href="contact.html">Contact</a>
@@ -25,109 +343,130 @@
 
   <main class="container">
 
-    <section class="page-heading">
-      <h2>Experience</h2>
-      <p>
-        This page separates my background into two areas: research experience and professional work experience.
-      </p>
-    </section>
-
-    <!-- Two-column layout -->
-    <section class="two-column">
-
-      <!-- Left column: Research -->
-      <div class="column">
-        <h3>Research Experience</h3>
-
-        <article class="card">
-          <h4>Graduate Research Assistant</h4>
-          <p class="meta">Center of Design for Advanced Materials (CDAM), University of Alberta | Sep 2023 - Present</p>
-          <ul>
-            <li>Full-scale modeling of spiral welded pipelines under mixed-mode loading.</li>
-            <li>XFEM modeling for fracture toughness specimens.</li>
-            <li>Experimental fracture toughness testing and fatigue analysis.</li>
-            <li>Fatigue life assessment using Fe-safe and Abaqus.</li>
-            <li>Machine learning and data processing for failure root-cause studies.</li>
-            <li>Collaboration with Enbridge, DNV, TC Energy, and AltaML.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h4>Undergraduate Research Assistant</h4>
-          <p class="meta">Passive Safety Systems Lab, K.N. Toosi University of Technology | Sep 2021 - Sep 2023</p>
-          <ul>
-            <li>Studied mechanical behavior of lattice and metamaterial structures.</li>
-            <li>Worked on polymer additive manufacturing and composite structures.</li>
-            <li>Performed damage-based FEA using Abaqus.</li>
-            <li>Designed complex geometries using Grasshopper and Rhino.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h4>Teaching Experience</h4>
-          <ul>
-            <li>Machine Learning for Additive Manufacturing</li>
-            <li>Mechanical Design II</li>
-            <li>Design of Machine Elements I & II</li>
-            <li>Introduction to Finite Element Method</li>
-          </ul>
-        </article>
-      </div>
-
-      <!-- Right column: Work -->
-      <div class="column">
-        <h3>Work Experience</h3>
-
-        <article class="card">
-          <h4>Stress Analyst / Mechanical Designer</h4>
-          <p class="meta">CDAM, Edmonton, AB | Sep 2023 - Dec 2025</p>
-          <ul>
-            <li>Performed fracture, fatigue, static, dynamic, and vibration FEA using Abaqus and ANSYS.</li>
-            <li>Supported pipeline system reliability and stress assessment.</li>
-            <li>Worked with major energy stakeholders on structural integrity solutions.</li>
-            <li>Conducted design verification and fitness-for-service evaluations.</li>
-            <li>Planned and executed mechanical, fracture, and vibration testing.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h4>Mechanical Analyst</h4>
-          <p class="meta">National Research Council of Canada (NRC), Vancouver, BC | Jun 2025 - Nov 2025</p>
-          <ul>
-            <li>Conducted FEA to assess structural performance and safety.</li>
-            <li>Performed defect and failure analysis for reliability assessment.</li>
-            <li>Applied data-driven methods to structural health monitoring problems.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h4>Mechanical Designer / FEA Analyst</h4>
-          <p class="meta">Passive Safety Systems Laboratory, Tehran, Iran | Sep 2021 - Sep 2023</p>
-          <ul>
-            <li>Analyzed 3D-printed components for automotive applications.</li>
-            <li>Developed parametric models in NX for structural optimization.</li>
-            <li>Used LS-DYNA results to guide design improvements.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h4>Mechanical Designer (R&D / Manufacturing)</h4>
-          <p class="meta">Novin Fan Avaran, Tehran, Iran | Oct 2022 - Mar 2023</p>
-          <ul>
-            <li>Designed and optimized machinery components using SolidWorks and AutoCAD.</li>
-            <li>Supported R&D and manufacturability improvement activities.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Amirhossein Iranmehr</p>
+    <!-- PAGE HEADING -->
+    <div class="page-heading">
+      <div class="page-eyebrow">// Professional Background</div>
+      <h2>Experi<span>ence</span></h2>
+      <p>Research and professional work spanning energy infrastructure, structural integrity, advanced manufacturing, and applied machine learning.</p>
     </div>
-  </footer>
 
-</body>
-</html>
+    <!-- TWO COLUMNS -->
+    <div class="two-column">
+
+      <!-- LEFT: Research -->
+      <div>
+        <div class="column-label">// Research Experience</div>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-card">
+              <div class="tl-title">Graduate Research Assistant</div>
+              <div class="tl-meta">
+                Center of Design for Advanced Materials (CDAM)<br>
+                University of Alberta · Edmonton, AB · Sep 2023 – Present
+              </div>
+              <ul>
+                <li>Full-scale FEA modelling of spiral-welded pipelines under mixed-mode loading conditions.</li>
+                <li>XFEM modelling for fracture toughness specimens to characterize crack initiation and propagation.</li>
+                <li>Experimental fracture toughness testing and fatigue life analysis per ASTM standards.</li>
+                <li>Fatigue assessment using Fe-safe and Abaqus for pipeline integrity evaluation.</li>
+                <li>Machine learning and data processing applied to failure root-cause studies.</li>
+                <li>Active collaboration with Enbridge, DNV, TC Energy, and AltaML on industry-facing research.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-card">
+              <div class="tl-title">Undergraduate Research Assistant</div>
+              <div class="tl-meta">
+                Passive Safety Systems Lab<br>
+                K.N. Toosi University of Technology · Tehran, Iran · Sep 2021 – Sep 2023
+              </div>
+              <ul>
+                <li>Investigated mechanical behaviour of lattice and metamaterial structures under quasi-static and dynamic loading.</li>
+                <li>Researched polymer additive manufacturing and fibre-reinforced composite structures.</li>
+                <li>Performed damage-based FEA using Abaqus to model progressive failure in structural components.</li>
+                <li>Designed complex geometries for simulation using Grasshopper and Rhino.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Teaching -->
+        <div class="teach-card">
+          <div class="teach-label">// Teaching Experience</div>
+          <div class="teach-grid">
+            <div class="teach-item">Machine Learning for Additive Manufacturing</div>
+            <div class="teach-item">Mechanical Design II</div>
+            <div class="teach-item">Design of Machine Elements I &amp; II</div>
+            <div class="teach-item">Introduction to Finite Element Method</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Work -->
+      <div>
+        <div class="column-label">// Work Experience</div>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-card">
+              <div class="tl-title">Risk Analysis &amp; Diagnostics Engineer</div>
+              <div class="tl-meta">
+                Enbridge · Edmonton, AB · Jan 2026 – Present
+              </div>
+              <ul>
+                <li>Develop physics-based and data-driven models for risk assessment and integrity management of pipeline systems and energy facilities.</li>
+                <li>Evaluate complex failure mechanisms and identify critical risk scenarios to support engineering decision-making and mitigation planning.</li>
+                <li>Contribute to the analytical core of asset integrity programs for large-scale energy infrastructure.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-card">
+              <div class="tl-title">Stress Analyst / Mechanical Designer</div>
+              <div class="tl-meta">
+                CDAM · Edmonton, AB · Sep 2023 – Dec 2025
+              </div>
+              <ul>
+                <li>Performed fracture, fatigue, static, dynamic, and vibration FEA using Abaqus and ANSYS for pipeline system reliability.</li>
+                <li>Conducted design verification and fitness-for-service evaluations per ASME Section XI and API-579.</li>
+                <li>Delivered structural integrity solutions for major energy stakeholders including Enbridge, DNV, and TC Energy.</li>
+                <li>Planned and executed mechanical, fracture, and vibration testing per ASTM standards.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-card">
+              <div class="tl-title">Mechanical Analyst</div>
+              <div class="tl-meta">
+                National Research Council of Canada (NRC) · Vancouver, BC · Jun 2025 – Nov 2025
+              </div>
+              <ul>
+                <li>Conducted FEA to assess structural performance and safety under operational loading conditions.</li>
+                <li>Performed defect and failure analysis to identify degradation mechanisms and support reliability assessments.</li>
+                <li>Applied machine learning techniques for structural health monitoring (SHM) applications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-card">
+              <div class="tl-title">Mechanical Designer / FEA Analyst</div>
+              <div class="tl-meta">
+                Passive Safety Systems Laboratory · Tehran, Iran · Sep 2021 – Sep 2023
+              </div>
+              <ul>
+                <li>Analysed mechanical behaviour of 3D-printed components for automotive crashworthiness applications.</li>
+                <li>Developed parametric structural models in NX for geometry-driven simulation and design optimization.</li>
+                <li>Used LS-DYNA dynamic simulation results to guide crashbox design improvements.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div clas
