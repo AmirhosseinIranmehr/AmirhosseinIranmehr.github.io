@@ -48,39 +48,33 @@
             <a href="projects.html" class="btn">View Projects</a>
             <a href="contact.html" class="btn btn-outline">Contact Me</a>
           </div>
-
-          <div class="hero-stats anim-6">
-            <div>
-              <div class="stat-num">5+</div>
-              <div class="stat-label">Years Exp.</div>
-            </div>
-            <div>
-              <div class="stat-num">3</div>
-              <div class="stat-label">Sectors</div>
-            </div>
-            <div>
-              <div class="stat-num">6</div>
-              <div class="stat-label">Certifications</div>
-            </div>
-            <div>
-              <div class="stat-num">3.9</div>
-              <div class="stat-label">MSc GPA</div>
-            </div>
-          </div>
         </div>
 
         <!-- Right: Photo -->
         <div class="hero-image anim-img">
           <div class="hero-image-frame">
             <!--
-              UPDATE THIS: your photo is "Intro_Image" in your repo.
-              Try src="Intro_Image.jpg" — if it doesn't load,
-              check the exact filename and update accordingly.
+              ╔══════════════════════════════════════════╗
+              ║           HOW TO ADD YOUR PHOTO          ║
+              ╠══════════════════════════════════════════╣
+              ║ 1. Upload your photo to your GitHub repo ║
+              ║    (same folder as index.html)           ║
+              ║                                          ║
+              ║ 2. Rename it to something simple, e.g.: ║
+              ║       photo.jpg                          ║
+              ║                                          ║
+              ║ 3. Update the src below to match:        ║
+              ║       src="photo.jpg"                    ║
+              ║                                          ║
+              ║ Your current file in the repo is called  ║
+              ║ "Intro_Image" (originally _DSC1820.jpg)  ║
+              ║ so try: src="Intro_Image.jpg"            ║
+              ╚══════════════════════════════════════════╝
             -->
             <img src="Intro_Image.jpg" alt="Amirhossein Iranmehr" />
             <div class="hero-image-caption">
               <em>A. Iranmehr</em>
-              <span>Mechanical Engineer · E.I.T.</span>
+              <span>Calgary, AB &nbsp;·&nbsp; Mechanical Engineer</span>
             </div>
           </div>
         </div>
@@ -122,18 +116,17 @@
         </div>
       </section>
 
-    </div><!-- /container -->
+    </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Edmonton, AB</p>
+      <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Calgary, AB</p>
       <p><a href="mailto:iranmehr@ualberta.ca">iranmehr@ualberta.ca</a></p>
     </div>
   </footer>
 
   <script>
-    // Scroll reveal
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
       { threshold: 0.12 }
