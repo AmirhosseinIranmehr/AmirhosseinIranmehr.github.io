@@ -3,24 +3,543 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amirhossein Iranmehr | Introduction</title>
+  <title>Amirhossein Iranmehr | Mechanical Engineer</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─────────────────────────────────────────
+       CSS CUSTOM PROPERTIES
+    ───────────────────────────────────────── */
+    :root {
+      --bg:         #07090d;
+      --surface:    #0c1018;
+      --card:       #111620;
+      --border:     #1c2535;
+      --accent:     #00c8f0;
+      --accent-dim: rgba(0,200,240,.12);
+      --text:       #b8c8d8;
+      --heading:    #dde8f0;
+      --muted:      #546a7e;
+      --mono:       'Share Tech Mono', monospace;
+      --display:    'Syne', sans-serif;
+      --body-font:  'DM Sans', sans-serif;
+    }
+
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-weight: 300;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* Subtle engineering grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,240,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,240,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       SITE HEADER / NAV
+    ───────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(7,9,13,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .9rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .site-header h1 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -.01em;
+      white-space: nowrap;
+    }
+
+    .site-header h1 span { color: var(--accent); }
+
+    .subtitle { display: none; }
+
+    .navbar {
+      display: flex;
+      gap: .2rem;
+      flex-wrap: wrap;
+    }
+
+    .navbar a {
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: .38rem .8rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: var(--accent);
+      border-color: var(--border);
+      background: var(--accent-dim);
+    }
+
+    /* ─────────────────────────────────────────
+       LAYOUT CONTAINER
+    ───────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    main.container {
+      padding-top: 0;
+      padding-bottom: 5rem;
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 5rem;
+      align-items: center;
+      padding: 6rem 0 5rem;
+      z-index: 1;
+    }
+
+    /* Corner bracket accents */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 3.5rem; left: -1rem;
+      width: 52px; height: 52px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+      opacity: .3;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 3.5rem; right: 0;
+      width: 52px; height: 52px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      opacity: .3;
+      pointer-events: none;
+    }
+
+    /* ── Hero Text ── */
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      opacity: 0;
+      animation: fadeUp .55s .05s forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 26px; height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+      font-weight: 800;
+      color: var(--heading);
+      line-height: .95;
+      letter-spacing: -.02em;
+      margin-bottom: .9rem;
+      opacity: 0;
+      animation: fadeUp .55s .15s forwards;
+    }
+    .hero-name .accent { color: var(--accent); }
+
+    .hero-role {
+      font-family: var(--mono);
+      font-size: clamp(.68rem, 1.3vw, .82rem);
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp .55s .25s forwards;
+    }
+
+    .hero-value {
+      font-family: var(--body-font);
+      font-size: 1.06rem;
+      font-weight: 500;
+      color: var(--heading);
+      border-left: 3px solid var(--accent);
+      padding-left: 1.1rem;
+      margin-bottom: 1.4rem;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp .55s .35s forwards;
+    }
+
+    .hero-desc {
+      font-size: .92rem;
+      color: var(--text);
+      max-width: 540px;
+      margin-bottom: 2.4rem;
+      opacity: 0;
+      animation: fadeUp .55s .45s forwards;
+    }
+    .hero-desc p + p { margin-top: .65rem; }
+
+    .button-group {
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .55s .55s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .62rem 1.45rem;
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all .2s;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+    }
+    .btn:hover { background: transparent; color: var(--accent); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+    }
+    .btn-outline:hover { background: var(--accent-dim); }
+
+    /* ── Stats Bar ── */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp .55s .65s forwards;
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: .62rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: .2rem;
+    }
+
+    /* ── Hero Image ── */
+    .hero-image {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeIn .9s .25s forwards;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      border-radius: 4px;
+      overflow: visible;
+    }
+
+    /* Top-left corner accent */
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: -8px;
+      width: 32px; height: 32px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+      z-index: 2;
+    }
+    /* Bottom-right corner accent */
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; right: -8px;
+      width: 32px; height: 32px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      z-index: 2;
+    }
+
+    .hero-image-inner {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-image-inner img {
+      display: block;
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(15%) contrast(1.04);
+      transition: filter .4s;
+    }
+    .hero-image-wrap:hover .hero-image-inner img {
+      filter: grayscale(0%) contrast(1.04);
+    }
+
+    /* Scanline overlay */
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,.055) 3px,
+        rgba(0,0,0,.055) 4px
+      );
+      pointer-events: none;
+    }
+
+    /* ID badge at bottom of photo */
+    .hero-id-tag {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(7,9,13,.88);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border);
+      padding: .65rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+    }
+    .id-tag-name {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+    }
+    .id-tag-role {
+      font-family: var(--mono);
+      font-size: .62rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+    }
+
+    /* ─────────────────────────────────────────
+       ABOUT CARD
+    ───────────────────────────────────────── */
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.6rem 3rem;
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: .66rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: .45rem;
+    }
+
+    .card h2 {
+      font-family: var(--display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -.01em;
+      margin-bottom: .55rem;
+    }
+
+    .card-divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin-bottom: 2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .about-col p {
+      font-size: .92rem;
+      color: var(--text);
+      margin-bottom: .85rem;
+    }
+    .about-col p:last-child { margin-bottom: 0; }
+
+    .focus-heading {
+      font-family: var(--mono);
+      font-size: .66rem;
+      color: var(--accent);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+
+    .focus-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .focus-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      font-size: .87rem;
+      color: var(--text);
+      padding: .58rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: rgba(0,200,240,.03);
+      transition: border-color .2s, background .2s;
+    }
+    .focus-list li:hover {
+      border-color: rgba(0,200,240,.3);
+      background: var(--accent-dim);
+    }
+    .focus-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: .48rem;
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .site-footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      text-align: center;
+      padding: 1.8rem 2.5rem;
+    }
+    .site-footer p {
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+
+    /* ─────────────────────────────────────────
+       ANIMATIONS
+    ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 4rem 0 3rem;
+        gap: 3rem;
+      }
+      .hero-image { order: -1; max-width: 300px; margin: 0 auto; }
+      .hero-image-inner img { height: 300px; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .card { padding: 2rem 1.5rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 1.2rem; }
+      .site-header .container { padding: .8rem 1.2rem; }
+      .hero-name { font-size: 2.4rem; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top navigation bar -->
+  <!-- ── HEADER ── -->
   <header class="site-header">
     <div class="container">
-      <h1>Amirhossein Iranmehr</h1>
-
-      <!-- Updated subtitle -->
-      <p class="subtitle">
-        Mechanical Engineer | Risk Analysis & Diagnostics | FEA & Stress Analyst | Data Analysis & Applied Machine Learning
-      </p>
-
+      <h1>Amirhossein <span>Iranmehr</span></h1>
       <nav class="navbar">
         <a href="index.html" class="active">Introduction</a>
-        <a href="experience.html">Experience</a>
+        <a href="expereince.html">Experience</a>
         <a href="projects.html">Projects</a>
         <a href="skills.html">Skills</a>
         <a href="contact.html">Contact</a>
@@ -28,73 +547,143 @@
     </div>
   </header>
 
+  <!-- ── MAIN ── -->
   <main class="container">
 
-    <!-- Hero / introduction section -->
+    <!-- ── HERO ── -->
     <section class="hero">
 
+      <!-- Left: Text Content -->
       <div class="hero-text">
 
-        <!-- STRONG TITLE -->
-        <h2>Risk Analysis & Diagnostics Engineer</h2>
+        <div class="hero-eyebrow">Mechanical Engineer · E.I.T. · APEGA</div>
 
-        <!-- KEY VALUE LINE (VERY IMPORTANT) -->
-        <p class="highlight">
-          I develop physics-based and data-driven models to support risk assessment and integrity management of energy infrastructure.
+        <h2 class="hero-name">
+          AMIR<span class="accent">HOSSEIN</span><br>IRANMEHR
+        </h2>
+
+        <div class="hero-role">
+          Risk Analysis &amp; Diagnostics &nbsp;·&nbsp; FEA &amp; Fracture Mechanics &nbsp;·&nbsp; Applied ML
+        </div>
+
+        <p class="hero-value">
+          Developing physics-based and data-driven models to advance risk assessment and structural integrity management for energy infrastructure.
         </p>
 
-        <!-- DESCRIPTION -->
-        <p>
-          I am a Mechanical Engineer (E.I.T) currently working at Enbridge, where I contribute to the
-          mathematical and analytical core of asset integrity and risk assessment for large-scale energy facilities.
-        </p>
+        <div class="hero-desc">
+          <p>
+            I am a Mechanical Engineer (E.I.T.) at <strong style="color:var(--heading)">Enbridge</strong>, contributing to the analytical and mathematical core of asset integrity and risk assessment for large-scale pipeline systems and energy facilities.
+          </p>
+          <p>
+            My expertise spans finite element analysis, fracture mechanics, fatigue assessment, reliability modelling, and applied machine learning — integrated to support the safe and efficient operation of critical energy infrastructure.
+          </p>
+        </div>
 
-        <p>
-          My expertise includes finite element analysis (FEA), fracture mechanics, fatigue assessment,
-          reliability modeling, and applied machine learning to support safe and efficient pipeline operations.
-        </p>
-
-        <!-- Buttons -->
         <div class="button-group">
           <a href="projects.html" class="btn">View Projects</a>
           <a href="contact.html" class="btn btn-outline">Contact Me</a>
         </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div>
+            <div class="stat-num">3</div>
+            <div class="stat-label">Industry Sectors</div>
+          </div>
+          <div>
+            <div class="stat-num">6</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div>
+            <div class="stat-num">3.9</div>
+            <div class="stat-label">MSc GPA</div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- IMAGE -->
+      <!-- Right: Profile Photo -->
       <div class="hero-image">
-        <img src="Intro_Image.jpg" alt="Profile photo of Amirhossein Iranmehr" />
+        <div class="hero-image-wrap">
+          <!--
+            ════════════════════════════════════════
+            IMAGE SETUP — READ THIS
+            ════════════════════════════════════════
+            Your photo is in the repo as "Intro_Image"
+            (originally _DSC1820.jpg).
+
+            Try one of these src values — use whichever
+            one displays correctly on your live site:
+
+              src="Intro_Image"        ← if no extension
+              src="Intro_Image.jpg"    ← most likely
+              src="Intro_Image.jpeg"
+              src="Intro_Image.png"
+
+            The image renders at ~460px tall, cropped
+            from the top — works best for a portrait.
+            ════════════════════════════════════════
+          -->
+          <div class="hero-image-inner">
+            <img
+              src="Intro_Image.jpg"
+              alt="Amirhossein Iranmehr — Mechanical Engineer"
+            />
+            <div class="hero-image-overlay"></div>
+            <div class="hero-id-tag">
+              <span class="id-tag-name">A. IRANMEHR</span>
+              <span class="id-tag-role">Mechanical Engineer · E.I.T.</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-    </section>
+    </section><!-- /hero -->
 
-    <!-- About section -->
+    <!-- ── ABOUT CARD ── -->
     <section class="card">
-      <h2>About Me</h2>
+      <div class="card-label">// About Me</div>
+      <h2>Background &amp; Focus</h2>
+      <div class="card-divider"></div>
 
-      <p>
-        I am currently a Risk Analysis and Diagnostics Engineer at Enbridge, working on advanced
-        integrity and risk assessment frameworks for pipeline and facility systems. My role involves
-        evaluating complex interactions between infrastructure components and identifying critical
-        risk scenarios to support decision-making and mitigation strategies.
-      </p>
+      <div class="about-grid">
 
-      <p>
-        My background combines solid mechanics, fracture and fatigue analysis, finite element modeling,
-        and data-driven approaches to improve reliability and safety in energy systems.
-      </p>
+        <div class="about-col">
+          <p>
+            I am a Risk Analysis and Diagnostics Engineer at <strong style="color:var(--heading)">Enbridge</strong>, where I develop and apply advanced integrity and risk assessment frameworks for pipeline systems and energy facilities. My role involves evaluating complex failure mechanisms, identifying critical risk scenarios, and translating engineering insight into actionable mitigation strategies.
+          </p>
+          <p>
+            My technical foundation combines solid mechanics, fracture and fatigue analysis, finite element modelling, and data-driven methods — applied together to enhance the reliability and safety of high-consequence energy infrastructure.
+          </p>
+          <p>
+            I hold an MSc in Mechanical Engineering from the University of Alberta (GPA 3.9) and a BSc from K.N. Toosi University of Technology, and I am registered as an Engineer-in-Training (E.I.T.) with APEGA.
+          </p>
+        </div>
 
-      <p>
-        My work focuses on pipeline integrity analysis, XFEM-based fracture modeling, fatigue life prediction,
-        and the development of risk-informed engineering solutions.
-      </p>
+        <div class="about-col">
+          <p class="focus-heading">Core Technical Focus</p>
+          <ul class="focus-list">
+            <li><span class="focus-dot"></span>Pipeline integrity analysis and fitness-for-service evaluation (ASME B31, API-579)</li>
+            <li><span class="focus-dot"></span>XFEM-based fracture modelling and fatigue life prediction</li>
+            <li><span class="focus-dot"></span>Static, dynamic, and vibration FEA using Abaqus and ANSYS</li>
+            <li><span class="focus-dot"></span>Risk-informed decision making and reliability modelling</li>
+            <li><span class="focus-dot"></span>Structural health monitoring with applied machine learning</li>
+            <li><span class="focus-dot"></span>Design for manufacturability (DFM) and root cause analysis</li>
+          </ul>
+        </div>
+
+      </div>
     </section>
 
   </main>
 
+  <!-- ── FOOTER ── -->
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Amirhossein Iranmehr</p>
+      <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Mechanical Engineer &nbsp;·&nbsp; Edmonton, AB</p>
     </div>
   </footer>
 
