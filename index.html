@@ -7,131 +7,11 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    /* ─────────────────────────────────────────
-       CSS CUSTOM PROPERTIES
-    ───────────────────────────────────────── */
-    :root {
-      --bg:         #07090d;
-      --surface:    #0c1018;
-      --card:       #111620;
-      --border:     #1c2535;
-      --accent:     #00c8f0;
-      --accent-dim: rgba(0,200,240,.12);
-      --text:       #b8c8d8;
-      --heading:    #dde8f0;
-      --muted:      #546a7e;
-      --mono:       'Share Tech Mono', monospace;
-      --display:    'Syne', sans-serif;
-      --body-font:  'DM Sans', sans-serif;
-    }
+    /* ── Page-specific styles not covered by style.css ── */
 
-    /* ─────────────────────────────────────────
-       RESET & BASE
-    ───────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    main.container { padding-top: 0; padding-bottom: 5rem; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--body-font);
-      font-weight: 300;
-      line-height: 1.75;
-      min-height: 100vh;
-    }
-
-    /* Subtle engineering grid */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,200,240,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,200,240,.025) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ─────────────────────────────────────────
-       SITE HEADER / NAV
-    ───────────────────────────────────────── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: rgba(7,9,13,.92);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .site-header .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: .9rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .site-header h1 {
-      font-family: var(--display);
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--heading);
-      letter-spacing: -.01em;
-      white-space: nowrap;
-    }
-
-    .site-header h1 span { color: var(--accent); }
-
-    .subtitle { display: none; }
-
-    .navbar {
-      display: flex;
-      gap: .2rem;
-      flex-wrap: wrap;
-    }
-
-    .navbar a {
-      font-family: var(--mono);
-      font-size: .68rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      padding: .38rem .8rem;
-      border: 1px solid transparent;
-      border-radius: 2px;
-      transition: all .2s;
-    }
-
-    .navbar a:hover,
-    .navbar a.active {
-      color: var(--accent);
-      border-color: var(--border);
-      background: var(--accent-dim);
-    }
-
-    /* ─────────────────────────────────────────
-       LAYOUT CONTAINER
-    ───────────────────────────────────────── */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2.5rem;
-    }
-
-    main.container {
-      padding-top: 0;
-      padding-bottom: 5rem;
-    }
-
-    /* ─────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────── */
+    /* Hero layout */
     .hero {
       position: relative;
       display: grid;
@@ -141,8 +21,6 @@
       padding: 6rem 0 5rem;
       z-index: 1;
     }
-
-    /* Corner bracket accents */
     .hero::before {
       content: '';
       position: absolute;
@@ -164,7 +42,6 @@
       pointer-events: none;
     }
 
-    /* ── Hero Text ── */
     .hero-text { position: relative; z-index: 1; }
 
     .hero-eyebrow {
@@ -213,7 +90,6 @@
     }
 
     .hero-value {
-      font-family: var(--body-font);
       font-size: 1.06rem;
       font-weight: 500;
       color: var(--heading);
@@ -236,39 +112,11 @@
     .hero-desc p + p { margin-top: .65rem; }
 
     .button-group {
-      display: flex;
-      gap: .8rem;
-      flex-wrap: wrap;
       opacity: 0;
       animation: fadeUp .55s .55s forwards;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .62rem 1.45rem;
-      font-family: var(--mono);
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: all .2s;
-      cursor: pointer;
-      border: 1px solid var(--accent);
-      background: var(--accent);
-      color: #000;
-      font-weight: 600;
-    }
-    .btn:hover { background: transparent; color: var(--accent); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--accent);
-    }
-    .btn-outline:hover { background: var(--accent-dim); }
-
-    /* ── Stats Bar ── */
+    /* Stats bar */
     .hero-stats {
       display: flex;
       gap: 2.5rem;
@@ -294,21 +142,14 @@
       margin-top: .2rem;
     }
 
-    /* ── Hero Image ── */
+    /* Hero image */
     .hero-image {
       position: relative;
       z-index: 1;
       opacity: 0;
       animation: fadeIn .9s .25s forwards;
     }
-
-    .hero-image-wrap {
-      position: relative;
-      border-radius: 4px;
-      overflow: visible;
-    }
-
-    /* Top-left corner accent */
+    .hero-image-wrap { position: relative; overflow: visible; }
     .hero-image-wrap::before {
       content: '';
       position: absolute;
@@ -318,7 +159,6 @@
       border-left: 2px solid var(--accent);
       z-index: 2;
     }
-    /* Bottom-right corner accent */
     .hero-image-wrap::after {
       content: '';
       position: absolute;
@@ -328,14 +168,12 @@
       border-right: 2px solid var(--accent);
       z-index: 2;
     }
-
     .hero-image-inner {
       position: relative;
       overflow: hidden;
       border-radius: 4px;
       border: 1px solid var(--border);
     }
-
     .hero-image-inner img {
       display: block;
       width: 100%;
@@ -345,24 +183,16 @@
       filter: grayscale(15%) contrast(1.04);
       transition: filter .4s;
     }
-    .hero-image-wrap:hover .hero-image-inner img {
-      filter: grayscale(0%) contrast(1.04);
-    }
-
-    /* Scanline overlay */
+    .hero-image-wrap:hover .hero-image-inner img { filter: grayscale(0%); }
     .hero-image-overlay {
       position: absolute;
       inset: 0;
       background: repeating-linear-gradient(
-        transparent,
-        transparent 3px,
-        rgba(0,0,0,.055) 3px,
-        rgba(0,0,0,.055) 4px
+        transparent, transparent 3px,
+        rgba(0,0,0,.055) 3px, rgba(0,0,0,.055) 4px
       );
       pointer-events: none;
     }
-
-    /* ID badge at bottom of photo */
     .hero-id-tag {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -388,54 +218,13 @@
       letter-spacing: .08em;
     }
 
-    /* ─────────────────────────────────────────
-       ABOUT CARD
-    ───────────────────────────────────────── */
-    .card {
-      position: relative;
-      z-index: 1;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2.6rem 3rem;
-    }
-
-    .card-label {
-      font-family: var(--mono);
-      font-size: .66rem;
-      color: var(--accent);
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      margin-bottom: .45rem;
-    }
-
-    .card h2 {
-      font-family: var(--display);
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--heading);
-      letter-spacing: -.01em;
-      margin-bottom: .55rem;
-    }
-
-    .card-divider {
-      width: 40px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      margin-bottom: 2rem;
-    }
-
+    /* About card extras */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
     }
-
-    .about-col p {
-      font-size: .92rem;
-      color: var(--text);
-      margin-bottom: .85rem;
-    }
+    .about-col p { font-size: .92rem; margin-bottom: .85rem; }
     .about-col p:last-child { margin-bottom: 0; }
 
     .focus-heading {
@@ -446,13 +235,7 @@
       text-transform: uppercase;
       margin-bottom: .8rem;
     }
-
-    .focus-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-    }
+    .focus-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
     .focus-list li {
       display: flex;
       align-items: flex-start;
@@ -465,10 +248,7 @@
       background: rgba(0,200,240,.03);
       transition: border-color .2s, background .2s;
     }
-    .focus-list li:hover {
-      border-color: rgba(0,200,240,.3);
-      background: var(--accent-dim);
-    }
+    .focus-list li:hover { border-color: rgba(0,200,240,.3); background: var(--accent-dim); }
     .focus-dot {
       width: 5px; height: 5px;
       border-radius: 50%;
@@ -478,27 +258,7 @@
       box-shadow: 0 0 6px var(--accent);
     }
 
-    /* ─────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────── */
-    .site-footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-      text-align: center;
-      padding: 1.8rem 2.5rem;
-    }
-    .site-footer p {
-      font-family: var(--mono);
-      font-size: .68rem;
-      color: var(--muted);
-      letter-spacing: .1em;
-    }
-
-    /* ─────────────────────────────────────────
-       ANIMATIONS
-    ───────────────────────────────────────── */
+    /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -508,32 +268,21 @@
       to   { opacity: 1; }
     }
 
-    /* ─────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────── */
+    /* Responsive */
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 4rem 0 3rem;
-        gap: 3rem;
-      }
+      .hero { grid-template-columns: 1fr; padding: 4rem 0 3rem; gap: 3rem; }
       .hero-image { order: -1; max-width: 300px; margin: 0 auto; }
       .hero-image-inner img { height: 300px; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .card { padding: 2rem 1.5rem; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
     }
-
     @media (max-width: 600px) {
-      .container { padding: 0 1.2rem; }
-      .site-header .container { padding: .8rem 1.2rem; }
       .hero-name { font-size: 2.4rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── HEADER ── -->
   <header class="site-header">
     <div class="container">
       <h1>Amirhossein <span>Iranmehr</span></h1>
@@ -547,15 +296,11 @@
     </div>
   </header>
 
-  <!-- ── MAIN ── -->
   <main class="container">
 
-    <!-- ── HERO ── -->
     <section class="hero">
 
-      <!-- Left: Text Content -->
       <div class="hero-text">
-
         <div class="hero-eyebrow">Mechanical Engineer · E.I.T. · APEGA</div>
 
         <h2 class="hero-name">
@@ -585,53 +330,22 @@
         </div>
 
         <div class="hero-stats">
-          <div>
-            <div class="stat-num">5+</div>
-            <div class="stat-label">Years Experience</div>
-          </div>
-          <div>
-            <div class="stat-num">3</div>
-            <div class="stat-label">Industry Sectors</div>
-          </div>
-          <div>
-            <div class="stat-num">6</div>
-            <div class="stat-label">Certifications</div>
-          </div>
-          <div>
-            <div class="stat-num">3.9</div>
-            <div class="stat-label">MSc GPA</div>
-          </div>
+          <div><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+          <div><div class="stat-num">3</div><div class="stat-label">Industry Sectors</div></div>
+          <div><div class="stat-num">6</div><div class="stat-label">Certifications</div></div>
+          <div><div class="stat-num">3.9</div><div class="stat-label">MSc GPA</div></div>
         </div>
-
       </div>
 
-      <!-- Right: Profile Photo -->
       <div class="hero-image">
         <div class="hero-image-wrap">
           <!--
-            ════════════════════════════════════════
-            IMAGE SETUP — READ THIS
-            ════════════════════════════════════════
-            Your photo is in the repo as "Intro_Image"
-            (originally _DSC1820.jpg).
-
-            Try one of these src values — use whichever
-            one displays correctly on your live site:
-
-              src="Intro_Image"        ← if no extension
-              src="Intro_Image.jpg"    ← most likely
-              src="Intro_Image.jpeg"
-              src="Intro_Image.png"
-
-            The image renders at ~460px tall, cropped
-            from the top — works best for a portrait.
-            ════════════════════════════════════════
+            Try src="Intro_Image.jpg" first.
+            If the image doesn't load, check the exact
+            filename in your repo and update accordingly.
           -->
           <div class="hero-image-inner">
-            <img
-              src="Intro_Image.jpg"
-              alt="Amirhossein Iranmehr — Mechanical Engineer"
-            />
+            <img src="Intro_Image.jpg" alt="Amirhossein Iranmehr — Mechanical Engineer" />
             <div class="hero-image-overlay"></div>
             <div class="hero-id-tag">
               <span class="id-tag-name">A. IRANMEHR</span>
@@ -641,22 +355,20 @@
         </div>
       </div>
 
-    </section><!-- /hero -->
+    </section>
 
-    <!-- ── ABOUT CARD ── -->
     <section class="card">
       <div class="card-label">// About Me</div>
       <h2>Background &amp; Focus</h2>
       <div class="card-divider"></div>
 
       <div class="about-grid">
-
         <div class="about-col">
           <p>
             I am a Risk Analysis and Diagnostics Engineer at <strong style="color:var(--heading)">Enbridge</strong>, where I develop and apply advanced integrity and risk assessment frameworks for pipeline systems and energy facilities. My role involves evaluating complex failure mechanisms, identifying critical risk scenarios, and translating engineering insight into actionable mitigation strategies.
           </p>
           <p>
-            My technical foundation combines solid mechanics, fracture and fatigue analysis, finite element modelling, and data-driven methods — applied together to enhance the reliability and safety of high-consequence energy infrastructure.
+            My technical foundation combines solid mechanics, fracture and fatigue analysis, finite element modelling, and data-driven approaches — applied together to enhance the reliability and safety of high-consequence energy infrastructure.
           </p>
           <p>
             I hold an MSc in Mechanical Engineering from the University of Alberta (GPA 3.9) and a BSc from K.N. Toosi University of Technology, and I am registered as an Engineer-in-Training (E.I.T.) with APEGA.
@@ -674,13 +386,11 @@
             <li><span class="focus-dot"></span>Design for manufacturability (DFM) and root cause analysis</li>
           </ul>
         </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- ── FOOTER ── -->
   <footer class="site-footer">
     <div class="container">
       <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Mechanical Engineer &nbsp;·&nbsp; Edmonton, AB</p>
