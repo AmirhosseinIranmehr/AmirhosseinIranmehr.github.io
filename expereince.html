@@ -129,37 +129,39 @@
       box-shadow: 0 4px 20px rgba(15,31,61,0.1);
     }
 
-    /* Institution image banner */
-    .tl-img {
+    /* Institution image */
+    .tl-img-wrap {
       width: 100%;
-      height: 90px;
-      object-fit: cover;
-      object-position: center;
-      display: block;
+      height: 100px;
+      overflow: hidden;
       border-bottom: 1px solid var(--border);
       background: var(--surface);
     }
 
-    /* Placeholder shown when image is missing */
-    .tl-img-placeholder {
+    .tl-img-wrap img {
       width: 100%;
-      height: 90px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .tl-card:hover .tl-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .tl-img-wrap.no-img {
+      height: 6px;
+      background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
+      border-bottom: none;
     }
 
     .tl-body { padding: 1.1rem 1.3rem; }
 
     .tl-title {
       font-family: var(--sans);
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 0.25rem;
@@ -178,9 +180,9 @@
     .tl-card ul li {
       position: relative;
       padding-left: 1rem;
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       color: var(--text);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
       line-height: 1.65;
     }
     .tl-card ul li::before {
@@ -226,15 +228,106 @@
     }
 
     .teach-item {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text);
-      padding: 0.4rem 0.65rem;
+      padding: 0.45rem 0.7rem;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface);
       transition: border-color 0.2s;
     }
     .teach-item:hover { border-color: var(--blue); }
+
+    /* Publications card */
+    .pub-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      margin-top: 1.5rem;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s, transform 0.5s, border-color 0.2s;
+    }
+    .pub-card.visible { opacity: 1; transform: none; }
+    .pub-card:hover { border-color: #bfcfee; }
+
+    .pub-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pub-orcid-link {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--blue);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+      text-transform: none;
+    }
+    .pub-orcid-link:hover { color: var(--accent); }
+
+    .pub-list { list-style: none; padding: 0; }
+
+    .pub-item {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pub-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .pub-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+      line-height: 1.5;
+    }
+
+    .pub-title a {
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pub-title a:hover { color: var(--blue); }
+
+    .pub-meta {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-meta span {
+      color: var(--accent);
+      font-weight: 500;
+      margin-right: 0.3rem;
+    }
+
+    .pub-contributors {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .pub-contributors strong {
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 600;
+    }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -254,7 +347,7 @@
 
   <header class="site-header">
     <div class="container">
-      <h1><em>AI</em> · Iranmehr</h1>
+      <h1><em>AH</em> · Iranmehr</h1>
       <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="expereince.html" class="active">Experience</a>
@@ -270,25 +363,25 @@
 
       <div class="page-heading">
         <div class="page-eyebrow">Professional Background</div>
-        <h2>Experience</span></h2>
-        <p>Research and professional work on energy infrastructure, structural integrity, advanced manufacturing, and applied machine learning.</p>
+        <h2>Experi<span>ence</span></h2>
+        <p>Research and professional work spanning energy infrastructure, structural integrity, advanced manufacturing, and applied machine learning.</p>
       </div>
 
       <div class="two-column">
 
-        <!-- LEFT: Research -->
+        <!-- ══════════════════════════
+             LEFT: Research
+        ══════════════════════════ -->
         <div>
           <div class="col-label">// Research Experience</div>
           <div class="timeline">
 
             <div class="tl-item">
               <div class="tl-card">
-                <!--
-                  IMAGE: Upload a photo of the CDAM lab or U of A campus.
-                  Name the file: img-cdam.jpg
-                  Then uncomment the <img> line below and remove the placeholder div.
-                -->
-                <img src="img-cdam.jpg" alt="CDAM - University of Alberta" class="tl-img" />
+                <div class="tl-img-wrap">
+                  <img src="img-cdam.jpg" alt="CDAM - University of Alberta"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
                 <div class="tl-body">
                   <div class="tl-title">Graduate Research Assistant</div>
                   <div class="tl-meta">
@@ -309,11 +402,31 @@
 
             <div class="tl-item">
               <div class="tl-card">
-                <!--
-                  IMAGE: Upload a photo of K.N. Toosi University or the lab.
-                  Name the file: img-kntu.jpg
-                -->
-                <img src="img-kntu.jpg" alt="K.N. Toosi University of Technology" class="tl-img" />
+                <div class="tl-img-wrap">
+                  <img src="img-nrc.jpg" alt="National Research Council of Canada"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
+                <div class="tl-body">
+                  <div class="tl-title">Mechanical Analyst — Research</div>
+                  <div class="tl-meta">
+                    National Research Council of Canada (NRC) · Vancouver, BC · Jun 2025 – Nov 2025
+                  </div>
+                  <ul>
+                    <li>Conducted FEA to assess structural performance and safety under operational loading conditions.</li>
+                    <li>Performed defect and failure analysis to identify degradation mechanisms and support reliability assessments.</li>
+                    <li>Applied machine learning techniques for structural health monitoring (SHM) applications.</li>
+                    <li>Collaborated with research engineers to translate analytical findings into practical design improvements.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-card">
+                <div class="tl-img-wrap">
+                  <img src="img-kntu.jpg" alt="K.N. Toosi University of Technology"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
                 <div class="tl-body">
                   <div class="tl-title">Undergraduate Research Assistant</div>
                   <div class="tl-meta">
@@ -330,7 +443,7 @@
               </div>
             </div>
 
-          </div>
+          </div><!-- /timeline -->
 
           <!-- Teaching -->
           <div class="teach-card">
@@ -342,20 +455,117 @@
               <div class="teach-item">Introduction to Finite Element Method</div>
             </div>
           </div>
-        </div>
 
-        <!-- RIGHT: Work -->
+          <!-- Publications -->
+          <div class="pub-card">
+            <div class="pub-label">
+              // Publications
+              <a class="pub-orcid-link"
+                 href="https://scholar.google.com/citations?user=0x-6rm4AAAAJ&hl=en"
+                 target="_blank" rel="noopener">
+                Google Scholar ↗
+              </a>
+            </div>
+            <ul class="pub-list">
+
+              <li class="pub-item">
+                <div class="pub-title">
+                  <a href="https://doi.org/10.1016/j.msea.2026.150086"
+                     target="_blank" rel="noopener">
+                    Fracture behavior of spiral welded API X70 pipeline steels under monotonic and cyclic loading ↗
+                  </a>
+                </div>
+                <div class="pub-meta">
+                  <span>2026</span>
+                  Materials Science and Engineering: A &nbsp;·&nbsp; Journal article
+                </div>
+                <div class="pub-contributors">
+                  S. Sayahlatifi; H. Li; C. Duan; <strong>A. Iranmehr</strong>; B.R. Hanna; L. Lamborn; A. Hemmati; J.D. Hogan
+                </div>
+              </li>
+
+              <li class="pub-item">
+                <div class="pub-title">
+                  <a href="https://doi.org/10.1016/j.tafmec.2025.105175"
+                     target="_blank" rel="noopener">
+                    Numerical investigation of constraint-dependent crack growth in X70 pipeline steel using XFEM-based cohesive segments approach with surface strain-based J-integral evaluation ↗
+                  </a>
+                </div>
+                <div class="pub-meta">
+                  <span>2025</span>
+                  Theoretical and Applied Fracture Mechanics &nbsp;·&nbsp; Journal article
+                </div>
+                <div class="pub-contributors">
+                  <strong>A. Iranmehr</strong>; M. Kheirkhah Gilde; H. Li; B. Hanna; L. Lamborn; A. Hemmati; S. Adeeb; J. Hogan
+                </div>
+              </li>
+
+              <li class="pub-item">
+                <div class="pub-title">
+                  <a href="https://doi.org/10.1080/15376494.2025.2575372"
+                     target="_blank" rel="noopener">
+                    Hybrid polymer–composite architected tunable twist-compression metamaterials for energy absorption applications ↗
+                  </a>
+                </div>
+                <div class="pub-meta">
+                  <span>2025</span>
+                  Mechanics of Advanced Materials and Structures &nbsp;·&nbsp; Journal article
+                </div>
+                <div class="pub-contributors">
+                  <strong>A. Iranmehr</strong>; A. Tafazoli; M. Asgari; C. Mittelstedt
+                </div>
+              </li>
+
+              <li class="pub-item">
+                <div class="pub-title">
+                  <a href="https://doi.org/10.1115/pvp2025-153974"
+                     target="_blank" rel="noopener">
+                    Prediction of Tensile Strain Capacity of Spiral-Welded Pipes With Varying Initial Crack Sizes Using Extended Finite Element Method ↗
+                  </a>
+                </div>
+                <div class="pub-meta">
+                  <span>2025</span>
+                  ASME PVP Conference — Vol. 5B: Materials &amp; Fabrication &nbsp;·&nbsp; Conference paper
+                </div>
+                <div class="pub-contributors">
+                  <strong>A. Iranmehr</strong>; H. Li; B. Hanna; L. Lamborn; S. Adeeb; A. Hemmati; J. Hogan
+                </div>
+              </li>
+
+              <li class="pub-item">
+                <div class="pub-title">
+                  <a href="https://doi.org/10.1080/15397734.2024.2308650"
+                     target="_blank" rel="noopener">
+                    Architected tunable twist-compression coupling metastructures based on a generative parametric design for energy absorption and effective mechanical properties ↗
+                  </a>
+                </div>
+                <div class="pub-meta">
+                  <span>2024</span>
+                  Mechanics Based Design of Structures and Machines &nbsp;·&nbsp; Journal article
+                </div>
+                <div class="pub-contributors">
+                  <strong>A. Iranmehr</strong>; A. Tafazoli; M. Asgari
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+        </div><!-- /left -->
+
+        <!-- ══════════════════════════
+             RIGHT: Work
+        ══════════════════════════ -->
         <div>
           <div class="col-label">// Work Experience</div>
           <div class="timeline">
 
             <div class="tl-item">
               <div class="tl-card">
-                <!--
-                  IMAGE: Enbridge office or logo banner photo.
-                  Name the file: img-enbridge.jpg
-                -->
-                <img src="img-enbridge.jpg" alt="Enbridge" class="tl-img" />
+                <div class="tl-img-wrap">
+                  <img src="img-enbridge.jpg" alt="Enbridge"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
                 <div class="tl-body">
                   <div class="tl-title">Risk Analysis &amp; Diagnostics Engineer</div>
                   <div class="tl-meta">
@@ -372,11 +582,10 @@
 
             <div class="tl-item">
               <div class="tl-card">
-                <!--
-                  IMAGE: CDAM lab or U of A engineering building photo.
-                  Name the file: img-cdam-work.jpg
-                -->
-                <img src="img-cdam-work.jpg" alt="CDAM Edmonton" class="tl-img" />
+                <div class="tl-img-wrap">
+                  <img src="img-cdam-work.jpg" alt="CDAM Edmonton"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
                 <div class="tl-body">
                   <div class="tl-title">Stress Analyst / Mechanical Designer</div>
                   <div class="tl-meta">
@@ -394,32 +603,10 @@
 
             <div class="tl-item">
               <div class="tl-card">
-                <!--
-                  IMAGE: NRC building or lab photo.
-                  Name the file: img-nrc.jpg
-                -->
-                <img src="img-nrc.jpg" alt="National Research Council of Canada" class="tl-img" />
-                <div class="tl-body">
-                  <div class="tl-title">Stress Analyst</div>
-                  <div class="tl-meta">
-                    National Research Council of Canada (NRC) · Vancouver, BC · Jun 2025 – Feb 2025
-                  </div>
-                  <ul>
-                    <li>Conducted FEA to assess structural performance and safety under operational loading conditions.</li>
-                    <li>Performed defect and failure analysis to identify degradation mechanisms and support reliability assessments.</li>
-                    <li>Applied machine learning techniques for structural health monitoring (SHM) applications.</li>
-                  </ul>
+                <div class="tl-img-wrap">
+                  <img src="img-pssl.jpg" alt="Passive Safety Systems Laboratory"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
                 </div>
-              </div>
-            </div>
-
-            <div class="tl-item">
-              <div class="tl-card">
-                <!--
-                  IMAGE: Passive Safety Systems Lab or KNTU campus photo.
-                  Name the file: img-pssl.jpg
-                -->
-                <img src="img-kntu.jpg" alt="Passive Safety Systems Laboratory" class="tl-img" />
                 <div class="tl-body">
                   <div class="tl-title">Mechanical Designer / FEA Analyst</div>
                   <div class="tl-meta">
@@ -436,11 +623,10 @@
 
             <div class="tl-item">
               <div class="tl-card">
-                <!--
-                  IMAGE: Novin Fan Avaran office or machinery photo.
-                  Name the file: img-novin.jpg
-                -->
-                <img src="img-novin.jpg" alt="Novin Fan Avaran" class="tl-img" />
+                <div class="tl-img-wrap">
+                  <img src="img-novin.jpg" alt="Novin Fan Avaran"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
                 <div class="tl-body">
                   <div class="tl-title">Mechanical Designer (R&amp;D / Manufacturing)</div>
                   <div class="tl-meta">
@@ -455,8 +641,28 @@
               </div>
             </div>
 
-          </div>
-        </div>
+            <div class="tl-item">
+              <div class="tl-card">
+                <div class="tl-img-wrap">
+                  <img src="img-mcp.jpg" alt="MehrCam Pars"
+                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+                </div>
+                <div class="tl-body">
+                  <div class="tl-title">Mechanical Design Intern</div>
+                  <div class="tl-meta">
+                    MehrCam Pars (MCP) Co. · Tehran, Iran
+                  </div>
+                  <ul>
+                    <li>Designed and tested injection molds for automotive interior components to support tooling development.</li>
+                    <li>Improved manufacturability through process evaluation and data-driven analysis.</li>
+                    <li>Supported senior engineers with design documentation, testing, and reporting tasks.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /timeline -->
+        </div><!-- /right -->
 
       </div><!-- /two-column -->
     </div><!-- /container -->
@@ -474,7 +680,7 @@
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
       { threshold: 0.08 }
     );
-    document.querySelectorAll('.tl-item, .teach-card').forEach(el => obs.observe(el));
+    document.querySelectorAll('.tl-item, .teach-card, .pub-card').forEach(el => obs.observe(el));
   </script>
 
 </body>
