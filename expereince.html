@@ -45,7 +45,6 @@
       opacity: 0;
       animation: fadeUp 0.5s 0.15s forwards;
     }
-    .page-heading h2 span { color: var(--blue); }
 
     .page-heading p {
       font-size: 0.93rem;
@@ -157,6 +156,11 @@
       border-bottom: none;
     }
 
+    .tl-accent-bar {
+      height: 6px;
+      background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
+    }
+
     .tl-body { padding: 1.1rem 1.3rem; }
 
     .tl-title {
@@ -194,50 +198,6 @@
       line-height: 1.4;
     }
 
-    /* Teaching card */
-    .teach-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.2rem 1.4rem;
-      margin-top: 1.5rem;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.5s, transform 0.5s, border-color 0.2s;
-    }
-    .teach-card.visible { opacity: 1; transform: none; }
-    .teach-card:hover { border-color: #bfcfee; }
-
-    .teach-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--border);
-      font-weight: 500;
-    }
-
-    .teach-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.4rem;
-    }
-
-    .teach-item {
-      font-size: 0.84rem;
-      color: var(--text);
-      padding: 0.45rem 0.7rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      transition: border-color 0.2s;
-    }
-    .teach-item:hover { border-color: var(--blue); }
-
     /* Publications card */
     .pub-card {
       background: var(--card);
@@ -268,7 +228,7 @@
       justify-content: space-between;
     }
 
-    .pub-orcid-link {
+    .pub-scholar-link {
       font-family: var(--mono);
       font-size: 0.62rem;
       color: var(--blue);
@@ -277,7 +237,7 @@
       transition: color 0.2s;
       text-transform: none;
     }
-    .pub-orcid-link:hover { color: var(--accent); }
+    .pub-scholar-link:hover { color: var(--accent); }
 
     .pub-list { list-style: none; padding: 0; }
 
@@ -336,7 +296,6 @@
 
     @media (max-width: 860px) {
       .two-column { grid-template-columns: 1fr; }
-      .teach-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .container { padding: 0 1rem; }
@@ -363,7 +322,7 @@
 
       <div class="page-heading">
         <div class="page-eyebrow">Professional Background</div>
-        <h2>Experi<span>ence</span></h2>
+        <h2>Experience</h2>
         <p>Research and professional work spanning energy infrastructure, structural integrity, advanced manufacturing, and applied machine learning.</p>
       </div>
 
@@ -386,7 +345,7 @@
                   <div class="tl-title">Graduate Research Assistant</div>
                   <div class="tl-meta">
                     Center of Design for Advanced Materials (CDAM)<br>
-                    University of Alberta · Edmonton, AB · Sep 2023 – Feb 2025
+                    University of Alberta · Edmonton, AB · Sep 2023 – Present
                   </div>
                   <ul>
                     <li>Full-scale FEA modelling of spiral-welded pipelines under mixed-mode loading conditions.</li>
@@ -409,7 +368,7 @@
                 <div class="tl-body">
                   <div class="tl-title">Mechanical Analyst — Research</div>
                   <div class="tl-meta">
-                    National Research Council of Canada (NRC) · Vancouver, BC · Jun 2025 – Feb 2025
+                    National Research Council of Canada (NRC) · Vancouver, BC · Jun 2025 – Nov 2025
                   </div>
                   <ul>
                     <li>Conducted FEA to assess structural performance and safety under operational loading conditions.</li>
@@ -445,22 +404,11 @@
 
           </div><!-- /timeline -->
 
-          <!-- Teaching -->
-          <div class="teach-card">
-            <div class="teach-label">// Teaching Experience</div>
-            <div class="teach-grid">
-              <div class="teach-item">Machine Learning for Additive Manufacturing</div>
-              <div class="teach-item">Mechanical Design II</div>
-              <div class="teach-item">Design of Machine Elements I &amp; II</div>
-              <div class="teach-item">Introduction to Finite Element Method</div>
-            </div>
-          </div>
-
           <!-- Publications -->
           <div class="pub-card">
             <div class="pub-label">
               // Publications
-              <a class="pub-orcid-link"
+              <a class="pub-scholar-link"
                  href="https://scholar.google.com/citations?user=0x-6rm4AAAAJ&hl=en"
                  target="_blank" rel="noopener">
                 Google Scholar ↗
@@ -569,7 +517,7 @@
                 <div class="tl-body">
                   <div class="tl-title">Risk Analysis &amp; Diagnostics Engineer</div>
                   <div class="tl-meta">
-                    Enbridge · Calgary, AB · Mar 2026 – Present
+                    Enbridge · Calgary, AB · Jan 2026 – Present
                   </div>
                   <ul>
                     <li>Develop physics-based and data-driven models for risk assessment and integrity management of pipeline systems and energy facilities.</li>
@@ -589,7 +537,7 @@
                 <div class="tl-body">
                   <div class="tl-title">Stress Analyst / Mechanical Designer</div>
                   <div class="tl-meta">
-                    CDAM · Edmonton, AB · Sep 2023 – Feb 2025
+                    CDAM · Edmonton, AB · Sep 2023 – Dec 2025
                   </div>
                   <ul>
                     <li>Performed fracture, fatigue, static, dynamic, and vibration FEA using Abaqus and ANSYS for pipeline system reliability.</li>
@@ -623,10 +571,7 @@
 
             <div class="tl-item">
               <div class="tl-card">
-                <div class="tl-img-wrap">
-                  <img src="img-novin.jpg" alt="Novin Fan Avaran"
-                       onerror="this.parentElement.classList.add('no-img'); this.remove();" />
-                </div>
+                <div class="tl-accent-bar"></div>
                 <div class="tl-body">
                   <div class="tl-title">Mechanical Designer (R&amp;D / Manufacturing)</div>
                   <div class="tl-meta">
@@ -680,7 +625,7 @@
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
       { threshold: 0.08 }
     );
-    document.querySelectorAll('.tl-item, .teach-card, .pub-card').forEach(el => obs.observe(el));
+    document.querySelectorAll('.tl-item, .pub-card').forEach(el => obs.observe(el));
   </script>
 
 </body>
