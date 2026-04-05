@@ -322,6 +322,38 @@ main { padding-top: 64px; }
 }
 
 /* ============================================
+   MODAL IMAGE (projects page)
+   ============================================ */
+.modal-img-wrap {
+  width: 100%;
+  max-height: 420px;
+  overflow: hidden;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-img-wrap img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+}
+
+.modal-img-wrap.no-img {
+  height: 80px;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--border);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
    SECTION SHARED
    ============================================ */
 .section {
