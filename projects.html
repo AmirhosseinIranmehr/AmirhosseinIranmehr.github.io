@@ -90,13 +90,11 @@
       transform: translateY(-2px);
     }
 
-    /* Top accent bar */
     .proj-accent {
       height: 4px;
       background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
     }
 
-    /* Card header */
     .proj-header {
       padding: 1.2rem 1.3rem;
       display: flex;
@@ -133,7 +131,6 @@
       letter-spacing: 0.04em;
     }
 
-    /* Toggle arrow */
     .proj-toggle {
       width: 28px;
       height: 28px;
@@ -159,7 +156,7 @@
       transition: transform 0.3s;
     }
 
-    /* ── MODAL OVERLAY ── */
+    /* ── MODAL ── */
     .proj-modal {
       position: fixed;
       inset: 0;
@@ -178,7 +175,6 @@
       pointer-events: all;
     }
 
-    /* Dark backdrop */
     .modal-backdrop {
       position: absolute;
       inset: 0;
@@ -186,7 +182,6 @@
       backdrop-filter: blur(6px);
     }
 
-    /* Modal box */
     .modal-box {
       position: relative;
       z-index: 2;
@@ -206,22 +201,18 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Modal top accent */
     .modal-accent {
       height: 5px;
       background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
       border-radius: 6px 6px 0 0;
-      flex-shrink: 0;
     }
 
-    /* Modal image — full width, tall */
     .modal-img-wrap {
       width: 100%;
       height: 340px;
       overflow: hidden;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
     }
 
     .modal-img-wrap img {
@@ -233,7 +224,7 @@
     }
 
     .modal-img-wrap.no-img {
-      height: 120px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -243,7 +234,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* Modal content */
     .modal-content { padding: 2rem 2.2rem 2.2rem; }
 
     .modal-tag {
@@ -294,12 +284,26 @@
       border-radius: var(--radius);
     }
 
-    .modal-focus strong {
-      color: var(--accent);
-      font-weight: 500;
-    }
+    .modal-focus strong { color: var(--accent); font-weight: 500; }
 
-    /* Close button */
+    /* DOI link inside modal */
+    .modal-doi {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--blue);
+      text-decoration: none;
+      margin-top: 1rem;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-doi:hover { border-color: var(--blue); color: var(--navy); }
+
     .modal-close {
       position: absolute;
       top: 1rem;
@@ -317,11 +321,7 @@
       transition: background 0.2s, border-color 0.2s;
     }
 
-    .modal-close:hover {
-      background: var(--navy);
-      border-color: var(--navy);
-    }
-
+    .modal-close:hover { background: var(--navy); border-color: var(--navy); }
     .modal-close:hover svg { stroke: #fff; }
 
     .modal-close svg {
@@ -334,12 +334,15 @@
       transition: stroke 0.2s;
     }
 
+    /* DOI link wrapper in modal content */
+    #modalDoiWrap { display: none; }
+    #modalDoiWrap.visible { display: block; }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Prevent body scroll when modal open */
     body.modal-open { overflow: hidden; }
 
     @media (max-width: 900px) {
@@ -377,7 +380,7 @@
       <div class="page-heading">
         <div class="page-eyebrow">Engineering Work</div>
         <h2>Selected Projects</h2>
-        <p>Click any project to view full details.</p>
+        <p>Click any project to view full details. Research and engineering work spanning structural integrity, computational mechanics, and data-driven modelling.</p>
       </div>
 
       <div class="projects-grid">
@@ -386,7 +389,7 @@
         <div class="proj-card"
              data-tag="Data Analysis · Pipeline"
              data-title="Pipeline Failure Data Processing and Root-Cause Analysis"
-             data-tools="Python · Data Analysis · Machine Learning · PHMSA "
+             data-tools="Python · Data Analysis · Machine Learning · PHMSA"
              data-img="img-proj-pipeline-data.jpg"
              data-desc="Processed historical pipeline accident data to investigate mechanical and environmental failure routes and identify the main parameters affecting pipeline incidents. Applied statistical methods and machine learning to reveal failure trends across large operational datasets, providing engineering insight for risk mitigation decisions."
              data-focus="data analysis · engineering interpretation · failure trends · root-cause identification · risk assessment">
@@ -395,7 +398,7 @@
             <div class="proj-header-left">
               <div class="proj-tag">Data Analysis · Pipeline</div>
               <div class="proj-title">Pipeline Failure Data Processing and Root-Cause Analysis</div>
-              <div class="proj-tools">Python · Data Analysis · ML</div>
+              <div class="proj-tools">Python · Data Analysis · ML · PHMSA</div>
             </div>
             <div class="proj-toggle">
               <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -428,7 +431,7 @@
         <div class="proj-card"
              data-tag="Machine Learning · Fatigue"
              data-title="Fatigue Analysis Using Surrogate LSTM-FEA Models"
-             data-tools="Time-dependant · Deep Learning · LSTM · FEA"
+             data-tools="Time-dependent · Deep Learning · LSTM · FEA"
              data-img="img-proj-lstm-fatigue.jpg"
              data-desc="Built a surrogate deep learning and XFEM workflow for fatigue crack growth prediction in welded pipelines. Generated fatigue datasets using parameters such as stress ratio, material zone, and stress range. The LSTM surrogate model enabled rapid cycle-by-cycle crack growth predictions without repeated FEA runs, significantly reducing computational cost."
              data-focus="fatigue crack growth · LSTM surrogate · data-driven modelling · welded joints · cycle prediction">
@@ -436,8 +439,8 @@
           <div class="proj-header">
             <div class="proj-header-left">
               <div class="proj-tag">Machine Learning · Fatigue</div>
-              <div class="proj-title">Fatigue Analysis Using Surrogate LSTM-XFEM Models</div>
-              <div class="proj-tools">Time-dependant · Deep Learning · LSTM · FEA</div>
+              <div class="proj-title">Fatigue Analysis Using Surrogate LSTM-FEA Models</div>
+              <div class="proj-tools">Time-dependent · Deep Learning · LSTM · FEA</div>
             </div>
             <div class="proj-toggle">
               <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -445,7 +448,29 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 4 ── -->
+        <!-- ── PROJECT 4 — NEW: XFEM FRACTURE MECHANICS ── -->
+        <div class="proj-card"
+             data-tag="Fracture Mechanics · XFEM"
+             data-title="Fracture Mechanics Modelling and Analysis of Pipeline Steel Using XFEM-Based Cohesive Segments"
+             data-tools="Abaqus · XFEM · Python · Fracture Mechanics · SENT Specimens"
+             data-img="img-proj-xfem-sent.jpg"
+             data-doi="https://doi.org/10.1016/j.tafmec.2025.105175"
+             data-desc="Investigated constraint-dependent fracture behaviour of API X70 pipeline steel using the XFEM-based cohesive segments method applied to clamped Single Edge Notched Tension (SENT) specimens — the geometry most representative of surface flaws in steel pipelines. Three-dimensional XFEM models were developed and validated against experimental Force–CMOD and CTOD–Δa resistance curves from the literature. The study derived J-integral and CTOD resistance curves for twelve SENT specimens with plain-sided and side-grooved configurations across a/W ratios of 0.25 to 0.50. Three J-integral calculation methods were systematically compared: the incremental unloading compliance (CANMET) method, the CTOD-converted method, and a novel surface strain-based XFEM method using a Python post-processing script. Results showed that side-grooved specimens yield 3–10% lower CTOD values due to enhanced crack-tip constraint, and that shallow cracks exhibit up to 13% higher J-integral values than deep cracks, confirming the constraint dependence of fracture toughness. The surface strain-based XFEM method produced results consistent with standardised methods for crack extensions below 1 mm, while the incremental unloading compliance method underestimated J at larger extensions. These findings provide a computationally efficient, low-cost alternative to physical fracture toughness testing for pipeline integrity assessment."
+             data-focus="XFEM · cohesive zone model · J-integral · CTOD resistance curves · SENT specimens · crack tip constraint · side-groove effect · API X70 · pipeline integrity · fitness-for-service">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">Fracture Mechanics · XFEM</div>
+              <div class="proj-title">Fracture Mechanics Modelling and Analysis of Pipeline Steel Using XFEM-Based Cohesive Segments</div>
+              <div class="proj-tools">Abaqus · XFEM · Python · SENT Specimens</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── PROJECT 5 ── -->
         <div class="proj-card"
              data-tag="Structural Analysis · AM"
              data-title="Damage Analysis of 3D-Printed &amp; Composite Structures"
@@ -466,7 +491,7 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 5 ── -->
+        <!-- ── PROJECT 6 ── -->
         <div class="proj-card"
              data-tag="Mechanical Design · Manufacturing"
              data-title="Mechanical Design for Manufacturing Applications"
@@ -487,7 +512,7 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 6 ── -->
+        <!-- ── PROJECT 7 ── -->
         <div class="proj-card"
              data-tag="Thermal Engineering · ML"
              data-title="Surrogate Physics-Informed Model for Optimal Design of Lattice-Based Heat Exchangers"
@@ -508,7 +533,7 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 7 ── -->
+        <!-- ── PROJECT 8 ── -->
         <div class="proj-card"
              data-tag="Data Analysis · Environment"
              data-title="Air Quality Prediction in Beijing: A Temporal Data Analysis"
@@ -529,7 +554,7 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 8 ── -->
+        <!-- ── PROJECT 9 ── -->
         <div class="proj-card"
              data-tag="Design Optimisation · Aerospace"
              data-title="Optimising Turbine Blade Design: Integrating Topology Optimisation and Material Selection"
@@ -554,9 +579,7 @@
     </div><!-- /container -->
   </main>
 
-  <!-- ══════════════════════════════
-       MODAL
-  ══════════════════════════════ -->
+  <!-- ── MODAL ── -->
   <div class="proj-modal" id="projModal">
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-box" id="modalBox">
@@ -568,12 +591,17 @@
         <img id="modalImg" src="" alt="" />
       </div>
       <div class="modal-content">
-        <div class="modal-tag"  id="modalTag"></div>
+        <div class="modal-tag"   id="modalTag"></div>
         <div class="modal-title" id="modalTitle"></div>
         <div class="modal-tools" id="modalTools"></div>
-        <p class="modal-desc"   id="modalDesc"></p>
+        <p   class="modal-desc"  id="modalDesc"></p>
         <div class="modal-focus">
           <strong>Focus:</strong> <span id="modalFocus"></span>
+        </div>
+        <div id="modalDoiWrap">
+          <a id="modalDoi" class="modal-doi" href="#" target="_blank" rel="noopener">
+            ↗ View Published Paper (DOI)
+          </a>
         </div>
       </div>
     </div>
@@ -595,16 +623,18 @@
     document.querySelectorAll('.proj-card').forEach(el => obs.observe(el));
 
     /* Modal elements */
-    const modal       = document.getElementById('projModal');
-    const backdrop    = document.getElementById('modalBackdrop');
-    const closeBtn    = document.getElementById('modalClose');
-    const modalImg    = document.getElementById('modalImg');
-    const modalImgWrap= document.getElementById('modalImgWrap');
-    const modalTag    = document.getElementById('modalTag');
-    const modalTitle  = document.getElementById('modalTitle');
-    const modalTools  = document.getElementById('modalTools');
-    const modalDesc   = document.getElementById('modalDesc');
-    const modalFocus  = document.getElementById('modalFocus');
+    const modal        = document.getElementById('projModal');
+    const backdrop     = document.getElementById('modalBackdrop');
+    const closeBtn     = document.getElementById('modalClose');
+    const modalImg     = document.getElementById('modalImg');
+    const modalImgWrap = document.getElementById('modalImgWrap');
+    const modalTag     = document.getElementById('modalTag');
+    const modalTitle   = document.getElementById('modalTitle');
+    const modalTools   = document.getElementById('modalTools');
+    const modalDesc    = document.getElementById('modalDesc');
+    const modalFocus   = document.getElementById('modalFocus');
+    const modalDoi     = document.getElementById('modalDoi');
+    const modalDoiWrap = document.getElementById('modalDoiWrap');
 
     function openModal(card) {
       const d = card.dataset;
@@ -613,6 +643,14 @@
       modalTools.textContent = d.tools || '';
       modalDesc.textContent  = d.desc  || '';
       modalFocus.textContent = d.focus || '';
+
+      /* DOI link — only show if data-doi is set */
+      if (d.doi) {
+        modalDoi.href = d.doi;
+        modalDoiWrap.classList.add('visible');
+      } else {
+        modalDoiWrap.classList.remove('visible');
+      }
 
       /* Image */
       modalImgWrap.classList.remove('no-img');
@@ -634,19 +672,13 @@
       document.body.classList.remove('modal-open');
     }
 
-    /* Open on card click */
     document.querySelectorAll('.proj-card').forEach(card => {
       card.addEventListener('click', () => openModal(card));
     });
 
-    /* Close on backdrop or X button */
     backdrop.addEventListener('click', closeModal);
     closeBtn.addEventListener('click', closeModal);
-
-    /* Close on Escape key */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
 
 </body>
