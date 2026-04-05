@@ -5,17 +5,314 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amirhossein Iranmehr | Contact</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    main { padding-top: 64px; }
+
+    .page-heading {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.05s forwards;
+    }
+    .page-eyebrow::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .page-heading h2 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.15s forwards;
+    }
+
+    .page-heading p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.25s forwards;
+    }
+
+    /* ── CONTACT LAYOUT ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 5rem;
+      align-items: start;
+    }
+
+    /* ── INFO CARD ── */
+    .contact-info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .contact-info-card.visible { opacity: 1; transform: none; }
+
+    .contact-card-accent {
+      height: 3px;
+      background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
+    }
+
+    .contact-card-header {
+      padding: 1.2rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-card-title {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .contact-card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* ── CONTACT LINK ITEMS ── */
+    .contact-link-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-link-item:hover {
+      border-color: var(--blue);
+      background: var(--dim);
+      box-shadow: 0 2px 12px rgba(29,78,216,0.08);
+    }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-link-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .contact-link-text { flex: 1; }
+
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-link-value {
+      font-family: var(--sans);
+      font-size: 0.87rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    .contact-link-arrow {
+      font-size: 0.75rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── AVAILABILITY BADGE ── */
+    .availability {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius);
+      background: #f0fdf4;
+      margin-top: 0.25rem;
+    }
+
+    .availability-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(22,163,74,0.2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(22,163,74,0.2); }
+      50%       { box-shadow: 0 0 0 6px rgba(22,163,74,0.08); }
+    }
+
+    .availability-text {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #15803d;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FORM CARD ── */
+    .contact-form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+    }
+    .contact-form-card.visible { opacity: 1; transform: none; }
+
+    .contact-form-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-field label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      padding: 0.68rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      font-family: var(--sans);
+      background: var(--surface);
+      color: var(--navy);
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: var(--card);
+      box-shadow: 0 0 0 3px rgba(29,78,216,0.09);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    .form-submit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .form-note {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-send {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius);
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .btn-send:hover {
+      background: var(--navy2);
+      border-color: var(--navy2);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 860px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 1rem; }
+    }
+  </style>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container">
-      <h1>Amirhossein Iranmehr</h1>
-      <p class="subtitle">Contact</p>
-
+      <h1><em>AH</em> · Iranmehr</h1>
       <nav class="navbar">
-        <a href="index.html">Introduction</a>
-        <a href="experience.html">Experience</a>
+        <a href="index.html">Home</a>
+        <a href="expereince.html">Experience</a>
         <a href="projects.html">Projects</a>
         <a href="skills.html">Skills</a>
         <a href="contact.html" class="active">Contact</a>
@@ -23,61 +320,200 @@
     </div>
   </header>
 
-  <main class="container">
+  <main>
+    <div class="container">
 
-    <section class="page-heading">
-      <h2>Contact</h2>
-      <p>
-        Feel free to reach out regarding research, engineering collaboration, or professional opportunities.
-      </p>
-    </section>
+      <div class="page-heading">
+        <div class="page-eyebrow">Get In Touch</div>
+        <h2>Contact</h2>
+        <p>Open to research collaborations, engineering opportunities, and professional discussions. Feel free to reach out.</p>
+      </div>
 
-    <section class="card">
-      <h3>Get in Touch</h3>
+      <div class="contact-layout">
 
-      <p><strong>Email:</strong> iranmehr@ualberta.ca</p>
-      <p><strong>Phone:</strong> +1 (587) 936-3257</p>
+        <!-- ── LEFT: Info ── -->
+        <div class="contact-info-card">
+          <div class="contact-card-accent"></div>
+          <div class="contact-card-header">
+            <div class="contact-card-title">Contact Information</div>
+          </div>
+          <div class="contact-card-body">
 
-      <!-- Update your LinkedIn URL here -->
-      <p>
-        <strong>LinkedIn:</strong>
-        <a href="https://www.linkedin.com/" target="_blank">Your LinkedIn Profile</a>
-      </p>
+            <!-- Email -->
+            <a href="mailto:iranmehr@ualberta.ca" class="contact-link-item">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact-link-text">
+                <div class="contact-link-label">Email</div>
+                <div class="contact-link-value">iranmehr@ualberta.ca</div>
+              </div>
+              <span class="contact-link-arrow">→</span>
+            </a>
 
-      <!-- Update your GitHub URL here -->
-      <p>
-        <strong>GitHub:</strong>
-        <a href="https://github.com/" target="_blank">Your GitHub Profile</a>
-      </p>
-    </section>
+            <!-- Phone -->
+            <a href="tel:+15879363257" class="contact-link-item">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="contact-link-text">
+                <div class="contact-link-label">Phone</div>
+                <div class="contact-link-value">+1 (587) 936-3257</div>
+              </div>
+              <span class="contact-link-arrow">→</span>
+            </a>
 
-    <!-- Optional simple contact form
-         Note: this will not send messages by itself on GitHub Pages.
-         For real forms, you need Formspree, Netlify Forms, etc.
-    -->
-    <section class="card">
-      <h3>Simple Contact Form</h3>
-      <form>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" />
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/amir-hosein-iranmehr"
+               target="_blank" rel="noopener"
+               class="contact-link-item">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </div>
+              <div class="contact-link-text">
+                <div class="contact-link-label">LinkedIn</div>
+                <div class="contact-link-value">amir-hosein-iranmehr</div>
+              </div>
+              <span class="contact-link-arrow">→</span>
+            </a>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Your email" />
+            <!-- GitHub -->
+            <a href="https://github.com/AmirhosseinIranmehr"
+               target="_blank" rel="noopener"
+               class="contact-link-item">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                </svg>
+              </div>
+              <div class="contact-link-text">
+                <div class="contact-link-label">GitHub</div>
+                <div class="contact-link-value">AmirhosseinIranmehr</div>
+              </div>
+              <span class="contact-link-arrow">→</span>
+            </a>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" placeholder="Write your message"></textarea>
+            <!-- Google Scholar -->
+            <a href="https://scholar.google.com/citations?user=0x-6rm4AAAAJ&hl=en"
+               target="_blank" rel="noopener"
+               class="contact-link-item">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </div>
+              <div class="contact-link-text">
+                <div class="contact-link-label">Google Scholar</div>
+                <div class="contact-link-value">View Publications</div>
+              </div>
+              <span class="contact-link-arrow">→</span>
+            </a>
 
-        <button type="submit" class="btn">Send</button>
-      </form>
-    </section>
+            <!-- ORCID -->
+            <a href="https://orcid.org/0009-0009-6435-1567"
+               target="_blank" rel="noopener"
+               class="contact-link-item">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="16"/>
+                  <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+              </div>
+              <div class="contact-link-text">
+                <div class="contact-link-label">ORCID</div>
+                <div class="contact-link-value">0009-0009-6435-1567</div>
+              </div>
+              <span class="contact-link-arrow">→</span>
+            </a>
 
+            <!-- Availability badge -->
+            <div class="availability">
+              <div class="availability-dot"></div>
+              <span class="availability-text">Open to engineering &amp; research opportunities · Calgary, AB</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── RIGHT: Form ── -->
+        <div class="contact-form-card">
+          <div class="contact-card-accent"></div>
+          <div class="contact-card-header">
+            <div class="contact-card-title">Send a Message</div>
+          </div>
+          <div class="contact-form-body">
+
+            <!--
+              To make this form functional on GitHub Pages,
+              sign up at https://formspree.io (free) and replace
+              YOUR_FORM_ID below with your actual Formspree ID.
+              e.g. action="https://formspree.io/f/xabcdefg"
+            -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+              <div class="form-row" style="margin-bottom:1rem;">
+                <div class="form-field">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" placeholder="Your name" required />
+                </div>
+                <div class="form-field">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                </div>
+              </div>
+
+              <div class="form-field" style="margin-bottom:1rem;">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Research collaboration, opportunity, etc." />
+              </div>
+
+              <div class="form-field" style="margin-bottom:1.2rem;">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Write your message here…" required></textarea>
+              </div>
+
+              <div class="form-submit">
+                <span class="form-note">
+                  Form powered by Formspree — replace YOUR_FORM_ID to activate.
+                </span>
+                <button type="submit" class="btn-send">
+                  Send Message →
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div><!-- /contact-layout -->
+    </div><!-- /container -->
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Amirhossein Iranmehr</p>
+      <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Calgary, AB</p>
+      <p><a href="mailto:iranmehr@ualberta.ca">iranmehr@ualberta.ca</a></p>
     </div>
   </footer>
+
+  <script>
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.contact-info-card, .contact-form-card').forEach(el => obs.observe(el));
+  </script>
 
 </body>
 </html>
