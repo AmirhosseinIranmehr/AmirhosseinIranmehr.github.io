@@ -5,17 +5,264 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amirhossein Iranmehr | Projects</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    main { padding-top: 64px; }
+
+    .page-heading {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.05s forwards;
+    }
+    .page-eyebrow::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .page-heading h2 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.15s forwards;
+    }
+
+    .page-heading p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.25s forwards;
+    }
+
+    /* ── PROJECT GRID ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      padding-bottom: 5rem;
+    }
+
+    /* ── PROJECT CARD (collapsed) ── */
+    .proj-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s, transform 0.5s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .proj-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .proj-card:hover {
+      border-color: #bfcfee;
+      box-shadow: 0 6px 24px rgba(15,31,61,0.12);
+      transform: translateY(-2px);
+    }
+
+    .proj-card.open {
+      border-color: var(--blue);
+    }
+
+    /* Top accent bar */
+    .proj-accent {
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
+    }
+
+    /* Card header — always visible */
+    .proj-header {
+      padding: 1.2rem 1.3rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .proj-header-left { flex: 1; }
+
+    .proj-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .proj-title {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+
+    .proj-tools {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Toggle arrow */
+    .proj-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, transform 0.3s;
+      margin-top: 0.1rem;
+    }
+
+    .proj-toggle svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.3s;
+    }
+
+    .proj-card.open .proj-toggle {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .proj-card.open .proj-toggle svg {
+      stroke: #fff;
+      transform: rotate(180deg);
+    }
+
+    /* ── PROJECT BODY (expanded) ── */
+    .proj-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease;
+    }
+
+    .proj-card.open .proj-body {
+      max-height: 600px;
+    }
+
+    .proj-body-inner {
+      border-top: 1px solid var(--border);
+      padding: 1.2rem 1.3rem;
+    }
+
+    /* Project image */
+    .proj-img-wrap {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 1rem;
+    }
+
+    .proj-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .proj-card:hover .proj-img-wrap img {
+      transform: scale(1.03);
+    }
+
+    .proj-img-wrap.no-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--border);
+      letter-spacing: 0.1em;
+      height: 60px;
+    }
+
+    .proj-desc {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .proj-focus {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      line-height: 1.6;
+    }
+
+    .proj-focus strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 1rem; }
+    }
+  </style>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container">
-      <h1>Amirhossein Iranmehr</h1>
-      <p class="subtitle">Projects</p>
-
+      <h1><em>AH</em> · Iranmehr</h1>
       <nav class="navbar">
-        <a href="index.html">Introduction</a>
-        <a href="experience.html">Experience</a>
+        <a href="index.html">Home</a>
+        <a href="expereince.html">Experience</a>
         <a href="projects.html" class="active">Projects</a>
         <a href="skills.html">Skills</a>
         <a href="contact.html">Contact</a>
@@ -23,90 +270,208 @@
     </div>
   </header>
 
-  <main class="container">
+  <main>
+    <div class="container">
 
-    <section class="page-heading">
-      <h2>Selected Projects</h2>
-      <p>
-        Below are some of the main research and engineering projects I have worked on.
-      </p>
-    </section>
+      <div class="page-heading">
+        <div class="page-eyebrow">Engineering Work</div>
+        <h2>Selected Projects</h2>
+        <p>Click any project to expand and view details. Research and engineering work spanning structural integrity, computational mechanics, and data-driven modelling.</p>
+      </div>
 
-    <!-- Project 1 -->
-    <section class="card">
-      <h3>Pipeline Failure Data Processing and Root-Cause Analysis</h3>
-      <p>
-        Processed historical accident data to investigate mechanical and environmental routes of failure
-        and identify the main parameters affecting pipeline incidents.
-      </p>
-      <p>
-        <strong>Focus:</strong> data analysis, engineering interpretation, failure trends
-      </p>
-      <!-- Optional image -->
-      <!-- <img src="images/project-data-processing.jpg" alt="Pipeline data analysis project image"> -->
-    </section>
+      <div class="projects-grid">
 
-    <!-- Project 2 -->
-    <section class="card">
-      <h3>Tensile Strain Capacity of Spiral Welded Pipes</h3>
-      <p>
-        Developed XFEM-based models to predict the tensile strain capacity and fracture behavior
-        of spiral welded pipes and X70 pipeline steel under mixed-mode loading.
-      </p>
-      <p>
-        <strong>Tools:</strong> Abaqus, XFEM, fracture mechanics methods
-      </p>
-      <p>
-        <strong>Focus:</strong> crack behavior, mixed-mode loading, structural integrity
-      </p>
-    </section>
+        <!-- ── PROJECT 1 ── -->
+        <div class="proj-card">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">Data Analysis · Pipeline</div>
+              <div class="proj-title">Pipeline Failure Data Processing and Root-Cause Analysis</div>
+              <div class="proj-tools">Python · Data Analysis · ML</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <!--
+                Upload a project image and update src below.
+                Name it: img-proj-pipeline-data.jpg
+              -->
+              <div class="proj-img-wrap">
+                <img src="img-proj-pipeline-data.jpg" alt="Pipeline data analysis"
+                     onerror="this.parentElement.classList.add('no-img'); this.parentElement.textContent='No image uploaded';" />
+              </div>
+              <p class="proj-desc">
+                Processed historical pipeline accident data to investigate mechanical and environmental failure routes and identify the main parameters affecting pipeline incidents. Applied statistical methods and machine learning to reveal failure trends across large operational datasets.
+              </p>
+              <p class="proj-focus">
+                <strong>Focus:</strong> data analysis · engineering interpretation · failure trends · root-cause identification
+              </p>
+            </div>
+          </div>
+        </div>
 
-    <!-- Project 3 -->
-    <section class="card">
-      <h3>Fatigue Analysis of Welded Components Using Surrogate LSTM-XFEM Models</h3>
-      <p>
-        Built a surrogate deep learning and XFEM workflow for fatigue crack growth prediction in welded pipelines.
-        Generated fatigue datasets using parameters such as stress ratio, material zone, and stress range.
-      </p>
-      <p>
-        <strong>Tools:</strong> Abaqus, XFEM, Python, machine learning
-      </p>
-      <p>
-        <strong>Focus:</strong> fatigue crack growth, future prediction, data-driven modeling
-      </p>
-    </section>
+        <!-- ── PROJECT 2 ── -->
+        <div class="proj-card">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">FEA · Fracture Mechanics</div>
+              <div class="proj-title">Tensile Strain Capacity of Spiral Welded Pipes</div>
+              <div class="proj-tools">Abaqus · XFEM · Fracture Mechanics</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <!--
+                Name it: img-proj-xfem-pipe.jpg
+              -->
+              <div class="proj-img-wrap">
+                <img src="img-proj-xfem-pipe.jpg" alt="XFEM spiral pipe"
+                     onerror="this.parentElement.classList.add('no-img'); this.parentElement.textContent='No image uploaded';" />
+              </div>
+              <p class="proj-desc">
+                Developed XFEM-based finite element models to predict the tensile strain capacity and fracture behaviour of spiral welded pipes and X70 pipeline steel under mixed-mode loading conditions. Results directly supported fitness-for-service assessments for energy pipeline operators.
+              </p>
+              <p class="proj-focus">
+                <strong>Focus:</strong> crack behaviour · mixed-mode loading · structural integrity · API X70
+              </p>
+            </div>
+          </div>
+        </div>
 
-    <!-- Project 4 -->
-    <section class="card">
-      <h3>Damage and Structural Analysis of 3D-Printed / Composite Structures</h3>
-      <p>
-        Investigated mechanical performance and damage behavior of advanced structures using finite element analysis
-        and design optimization methods.
-      </p>
-      <p>
-        <strong>Tools:</strong> Abaqus, NX, Rhino/Grasshopper
-      </p>
-    </section>
+        <!-- ── PROJECT 3 ── -->
+        <div class="proj-card">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">Machine Learning · Fatigue</div>
+              <div class="proj-title">Fatigue Analysis Using Surrogate LSTM-XFEM Models</div>
+              <div class="proj-tools">Abaqus · Python · LSTM · XFEM</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <!--
+                Name it: img-proj-lstm-fatigue.jpg
+              -->
+              <div class="proj-img-wrap">
+                <img src="img-proj-lstm-fatigue.jpg" alt="LSTM fatigue model"
+                     onerror="this.parentElement.classList.add('no-img'); this.parentElement.textContent='No image uploaded';" />
+              </div>
+              <p class="proj-desc">
+                Built a surrogate deep learning and XFEM workflow for fatigue crack growth prediction in welded pipelines. Generated fatigue datasets using parameters such as stress ratio, material zone, and stress range. The LSTM surrogate enabled rapid cycle-by-cycle predictions without repeated FEA runs.
+              </p>
+              <p class="proj-focus">
+                <strong>Focus:</strong> fatigue crack growth · LSTM surrogate · data-driven modelling · welded joints
+              </p>
+            </div>
+          </div>
+        </div>
 
-    <!-- Project 5 -->
-    <section class="card">
-      <h3>Mechanical Design for Manufacturing Applications</h3>
-      <p>
-        Designed industrial machinery and mechanical parts with emphasis on functionality,
-        manufacturability, and structural reliability.
-      </p>
-      <p>
-        <strong>Tools:</strong> SolidWorks, AutoCAD, CATIA
-      </p>
-    </section>
+        <!-- ── PROJECT 4 ── -->
+        <div class="proj-card">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">Structural Analysis · AM</div>
+              <div class="proj-title">Damage Analysis of 3D-Printed &amp; Composite Structures</div>
+              <div class="proj-tools">Abaqus · NX · Rhino · Grasshopper</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <!--
+                Name it: img-proj-composite.jpg
+              -->
+              <div class="proj-img-wrap">
+                <img src="img-proj-composite.jpg" alt="Composite structure analysis"
+                     onerror="this.parentElement.classList.add('no-img'); this.parentElement.textContent='No image uploaded';" />
+              </div>
+              <p class="proj-desc">
+                Investigated mechanical performance and damage behaviour of advanced lattice and metamaterial structures manufactured via polymer additive manufacturing and fibre-reinforced composites. Used parametric geometry tools and damage-based FEA to guide design optimisation.
+              </p>
+              <p class="proj-focus">
+                <strong>Focus:</strong> lattice structures · metamaterials · damage mechanics · additive manufacturing
+              </p>
+            </div>
+          </div>
+        </div>
 
+        <!-- ── PROJECT 5 ── -->
+        <div class="proj-card">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">Mechanical Design · Manufacturing</div>
+              <div class="proj-title">Mechanical Design for Manufacturing Applications</div>
+              <div class="proj-tools">SolidWorks · AutoCAD · CATIA V5</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <!--
+                Name it: img-proj-mech-design.jpg
+              -->
+              <div class="proj-img-wrap">
+                <img src="img-proj-mech-design.jpg" alt="Mechanical design"
+                     onerror="this.parentElement.classList.add('no-img'); this.parentElement.textContent='No image uploaded';" />
+              </div>
+              <p class="proj-desc">
+                Designed industrial machinery components and injection molds for automotive interior applications with emphasis on functionality, manufacturability, and structural reliability. Applied GD&amp;T standards and DFM principles throughout the design lifecycle.
+              </p>
+              <p class="proj-focus">
+                <strong>Focus:</strong> DFM · GD&amp;T · injection molding · industrial machinery · tooling design
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /projects-grid -->
+    </div><!-- /container -->
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Amirhossein Iranmehr</p>
+      <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Calgary, AB</p>
+      <p><a href="mailto:iranmehr@ualberta.ca">iranmehr@ualberta.ca</a></p>
     </div>
   </footer>
+
+  <script>
+    /* Scroll reveal */
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.proj-card').forEach(el => obs.observe(el));
+
+    /* Expand / collapse on click */
+    document.querySelectorAll('.proj-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const isOpen = card.classList.contains('open');
+        /* Close all others */
+        document.querySelectorAll('.proj-card').forEach(c => c.classList.remove('open'));
+        /* Toggle clicked one */
+        if (!isOpen) card.classList.add('open');
+      });
+    });
+  </script>
 
 </body>
 </html>
