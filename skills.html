@@ -5,17 +5,219 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amirhossein Iranmehr | Skills</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    main { padding-top: 64px; }
+
+    .page-heading {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.05s forwards;
+    }
+    .page-eyebrow::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .page-heading h2 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.15s forwards;
+    }
+
+    .page-heading p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.25s forwards;
+    }
+
+    /* ── SKILLS GRID ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      padding-bottom: 5rem;
+    }
+
+    /* ── SKILL CARD ── */
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s, transform 0.5s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .skill-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-card:hover {
+      border-color: #bfcfee;
+      box-shadow: 0 6px 24px rgba(15,31,61,0.12);
+    }
+
+    /* Card top accent bar */
+    .skill-card-accent {
+      height: 3px;
+      background: linear-gradient(90deg, var(--navy), var(--blue), var(--accent));
+    }
+
+    /* Card header */
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 1.1rem 1.3rem 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .skill-card-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .skill-card-title {
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
+    /* Skill items list */
+    .skill-items {
+      padding: 0.9rem 1.3rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.18s, background 0.18s;
+    }
+
+    .skill-item:hover {
+      border-color: var(--blue);
+      background: var(--dim);
+    }
+
+    /* Software icon inside each item */
+    .skill-item-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-item-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Fallback dot when no logo available */
+    .skill-item-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .skill-item-name {
+      font-family: var(--sans);
+      font-size: 0.86rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .skill-item-tag {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 1rem; }
+    }
+  </style>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container">
-      <h1>Amirhossein Iranmehr</h1>
-      <p class="subtitle">Skills</p>
-
+      <h1><em>AH</em> · Iranmehr</h1>
       <nav class="navbar">
-        <a href="index.html">Introduction</a>
-        <a href="experience.html">Experience</a>
+        <a href="index.html">Home</a>
+        <a href="expereince.html">Experience</a>
         <a href="projects.html">Projects</a>
         <a href="skills.html" class="active">Skills</a>
         <a href="contact.html">Contact</a>
@@ -23,93 +225,368 @@
     </div>
   </header>
 
-  <main class="container">
+  <main>
+    <div class="container">
 
-    <section class="page-heading">
-      <h2>Technical Skills</h2>
-      <p>
-        My skill set combines simulation, mechanical design, analysis, and programming for engineering applications.
-      </p>
-    </section>
-
-    <section class="grid-2">
-
-      <div class="card">
-        <h3>Simulation & Analysis</h3>
-        <ul>
-          <li>Abaqus</li>
-          <li>ANSYS</li>
-          <li>CESAR II</li>
-          <li>AutoPIPE</li>
-          <li>Fe-safe</li>
-          <li>LS-DYNA</li>
-        </ul>
+      <div class="page-heading">
+        <div class="page-eyebrow">Technical Expertise</div>
+        <h2>Skills &amp; Tools</h2>
+        <p>Simulation, mechanical design, programming, and engineering analysis capabilities built across research and industry roles.</p>
       </div>
 
-      <div class="card">
-        <h3>Mechanical Design & CAD</h3>
-        <ul>
-          <li>SolidWorks</li>
-          <li>NX</li>
-          <li>AutoCAD</li>
-          <li>CATIA V5</li>
-          <li>Rhino (Grasshopper)</li>
-          <li>GD&amp;T</li>
-        </ul>
-      </div>
+      <div class="skills-grid">
 
-      <div class="card">
-        <h3>Programming & Data</h3>
-        <ul>
-          <li>Python</li>
-          <li>MATLAB</li>
-          <li>Engineering Data Analysis</li>
-          <li>Machine Learning</li>
-        </ul>
-      </div>
+        <!-- ── SIMULATION & ANALYSIS ── -->
+        <div class="skill-card">
+          <div class="skill-card-accent"></div>
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <!-- Gear / simulation icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>
+              </svg>
+            </div>
+            <div class="skill-card-title">Simulation &amp; FEA</div>
+          </div>
+          <div class="skill-items">
 
-      <div class="card">
-        <h3>Manufacturing</h3>
-        <ul>
-          <li>Injection Molding</li>
-          <li>Machining</li>
-          <li>3D Printing</li>
-          <li>Design for Manufacturability (DFM)</li>
-        </ul>
-      </div>
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Abaqus_logo.svg/200px-Abaqus_logo.svg.png"
+                     alt="Abaqus"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">Abaqus</span>
+              <span class="skill-item-tag">FEA · XFEM</span>
+            </div>
 
-      <div class="card">
-        <h3>Engineering Areas</h3>
-        <ul>
-          <li>Stress Analysis</li>
-          <li>Fracture Mechanics</li>
-          <li>Fatigue Analysis</li>
-          <li>Vibration Analysis</li>
-          <li>Structural Integrity</li>
-          <li>Failure Assessment</li>
-        </ul>
-      </div>
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/ANSYS_logo.png/200px-ANSYS_logo.png"
+                     alt="ANSYS"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">ANSYS</span>
+              <span class="skill-item-tag">Structural</span>
+            </div>
 
-      <div class="card">
-        <h3>Codes & Standards</h3>
-        <ul>
-          <li>ASME</li>
-          <li>API</li>
-          <li>ISO</li>
-          <li>ASTM</li>
-          <li>CSA</li>
-        </ul>
-      </div>
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">CESAR II</span>
+              <span class="skill-item-tag">Piping</span>
+            </div>
 
-    </section>
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">AutoPIPE</span>
+              <span class="skill-item-tag">Pipeline</span>
+            </div>
 
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Fe-safe</span>
+              <span class="skill-item-tag">Fatigue</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">LS-DYNA</span>
+              <span class="skill-item-tag">Dynamic</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── CAD & DESIGN ── -->
+        <div class="skill-card">
+          <div class="skill-card-accent"></div>
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20M4 20V10l8-8 8 8v10"/>
+                <rect x="9" y="14" width="6" height="6"/>
+              </svg>
+            </div>
+            <div class="skill-card-title">Mechanical Design &amp; CAD</div>
+          </div>
+          <div class="skill-items">
+
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/SolidWorks_Logo.svg/200px-SolidWorks_Logo.svg.png"
+                     alt="SolidWorks"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">SolidWorks</span>
+              <span class="skill-item-tag">CSWP</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">NX (Siemens)</span>
+              <span class="skill-item-tag">Parametric</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Autocad_2017_icon.svg/200px-Autocad_2017_icon.svg.png"
+                     alt="AutoCAD"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">AutoCAD</span>
+              <span class="skill-item-tag">Drafting</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">CATIA V5</span>
+              <span class="skill-item-tag">Aerospace</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Rhino &amp; Grasshopper</span>
+              <span class="skill-item-tag">Parametric</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">GD&amp;T</span>
+              <span class="skill-item-tag">Standards</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── PROGRAMMING & DATA ── -->
+        <div class="skill-card">
+          <div class="skill-card-accent"></div>
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="skill-card-title">Programming &amp; Data</div>
+          </div>
+          <div class="skill-items">
+
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://cdn.simpleicons.org/python/3776AB"
+                     alt="Python"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">Python</span>
+              <span class="skill-item-tag">Primary</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://cdn.simpleicons.org/matlab/0076A8"
+                     alt="MATLAB"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">MATLAB</span>
+              <span class="skill-item-tag">Numerical</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://cdn.simpleicons.org/scikitlearn/F7931E"
+                     alt="Machine Learning"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">Machine Learning</span>
+              <span class="skill-item-tag">scikit · LSTM</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <img src="https://cdn.simpleicons.org/numpy/013243"
+                     alt="NumPy"
+                     onerror="this.parentElement.innerHTML='<div class=\'skill-item-dot\'></div>'" />
+              </div>
+              <span class="skill-item-name">Engineering Data Analysis</span>
+              <span class="skill-item-tag">NumPy · Pandas</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── ENGINEERING AREAS ── -->
+        <div class="skill-card">
+          <div class="skill-card-accent"></div>
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="skill-card-title">Engineering Analysis</div>
+          </div>
+          <div class="skill-items">
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Stress Analysis</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Fracture Mechanics</span>
+              <span class="skill-item-tag">XFEM · CTOD · J-integral</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Fatigue Analysis</span>
+              <span class="skill-item-tag">Fe-safe · S-N</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Vibration Analysis</span>
+              <span class="skill-item-tag">Modal · Seismic</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Structural Integrity</span>
+              <span class="skill-item-tag">FFS · API-579</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Failure Assessment</span>
+              <span class="skill-item-tag">FMEA · RCA</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── MANUFACTURING ── -->
+        <div class="skill-card">
+          <div class="skill-card-accent"></div>
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                <line x1="12" y1="12" x2="12" y2="16"/>
+                <line x1="10" y1="14" x2="14" y2="14"/>
+              </svg>
+            </div>
+            <div class="skill-card-title">Manufacturing</div>
+          </div>
+          <div class="skill-items">
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Injection Molding</span>
+              <span class="skill-item-tag">Tooling</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Machining</span>
+              <span class="skill-item-tag">CNC</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">3D Printing</span>
+              <span class="skill-item-tag">FDM · SLA</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">Design for Manufacturability</span>
+              <span class="skill-item-tag">DFM · DFA</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── CODES & STANDARDS ── -->
+        <div class="skill-card">
+          <div class="skill-card-accent"></div>
+          <div class="skill-card-header">
+            <div class="skill-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div class="skill-card-title">Codes &amp; Standards</div>
+          </div>
+          <div class="skill-items">
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">ASME</span>
+              <span class="skill-item-tag">B31 · Section XI · PVP</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">API</span>
+              <span class="skill-item-tag">API-579 · API 5L</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">ASTM</span>
+              <span class="skill-item-tag">E1820 · E8</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">ISO</span>
+              <span class="skill-item-tag">12135 · 27306</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">CSA</span>
+              <span class="skill-item-tag">Canadian Standards</span>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-item-dot"></div>
+              <span class="skill-item-name">DNV</span>
+              <span class="skill-item-tag">RP-F108</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /skills-grid -->
+    </div><!-- /container -->
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Amirhossein Iranmehr</p>
+      <p>© 2026 Amirhossein Iranmehr &nbsp;·&nbsp; Calgary, AB</p>
+      <p><a href="mailto:iranmehr@ualberta.ca">iranmehr@ualberta.ca</a></p>
     </div>
   </footer>
+
+  <script>
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.skill-card').forEach(el => obs.observe(el));
+  </script>
 
 </body>
 </html>
