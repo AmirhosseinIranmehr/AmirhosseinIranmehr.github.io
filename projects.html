@@ -153,7 +153,6 @@
       stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 0.3s;
     }
 
     /* ── MODAL ── */
@@ -207,33 +206,36 @@
       border-radius: 6px 6px 0 0;
     }
 
+    /* ── MODAL IMAGE ── */
     .modal-img-wrap {
       width: 100%;
-      height: 340px;
-      overflow: hidden;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
     }
 
     .modal-img-wrap img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
       display: block;
+      border-radius: 2px;
     }
 
     .modal-img-wrap.no-img {
       height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0;
       font-family: var(--mono);
       font-size: 0.65rem;
       color: var(--border);
       letter-spacing: 0.1em;
     }
 
+    /* ── MODAL CONTENT ── */
     .modal-content { padding: 2rem 2.2rem 2.2rem; }
 
     .modal-tag {
@@ -286,7 +288,6 @@
 
     .modal-focus strong { color: var(--accent); font-weight: 500; }
 
-    /* DOI link inside modal */
     .modal-doi {
       display: inline-flex;
       align-items: center;
@@ -304,6 +305,10 @@
     }
     .modal-doi:hover { border-color: var(--blue); color: var(--navy); }
 
+    #modalDoiWrap { display: none; }
+    #modalDoiWrap.visible { display: block; }
+
+    /* ── CLOSE BUTTON ── */
     .modal-close {
       position: absolute;
       top: 1rem;
@@ -320,23 +325,16 @@
       z-index: 10;
       transition: background 0.2s, border-color 0.2s;
     }
-
     .modal-close:hover { background: var(--navy); border-color: var(--navy); }
     .modal-close:hover svg { stroke: #fff; }
-
     .modal-close svg {
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       stroke: var(--navy);
       fill: none;
       stroke-width: 2.5;
       stroke-linecap: round;
       transition: stroke 0.2s;
     }
-
-    /* DOI link wrapper in modal content */
-    #modalDoiWrap { display: none; }
-    #modalDoiWrap.visible { display: block; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -347,7 +345,6 @@
 
     @media (max-width: 900px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
-      .modal-img-wrap { height: 220px; }
       .modal-content { padding: 1.4rem 1.5rem 1.8rem; }
       .modal-title { font-size: 1.15rem; }
     }
@@ -355,7 +352,6 @@
     @media (max-width: 580px) {
       .projects-grid { grid-template-columns: 1fr; }
       .container { padding: 0 1rem; }
-      .modal-img-wrap { height: 180px; }
     }
   </style>
 </head>
@@ -380,7 +376,7 @@
       <div class="page-heading">
         <div class="page-eyebrow">Engineering Work</div>
         <h2>Selected Projects</h2>
-        <p>Click any project to view full details.</p>
+        <p>Click any project to view full details. Research and engineering work spanning structural integrity, computational mechanics, and data-driven modelling.</p>
       </div>
 
       <div class="projects-grid">
@@ -448,27 +444,27 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 4 — NEW: XFEM FRACTURE MECHANICS ── -->
-    <div class="proj-card"
-     data-tag="Fracture Mechanics · XFEM"
-     data-title="Fracture Mechanics Modelling and Analysis of Pipeline Steel Using XFEM-Based Cohesive Segments"
-     data-tools="Abaqus · XFEM · Fracture Mechanics · SENT · SENB · CT Specimens"
-     data-img="img-proj-xfem-sent.jpg"
-     data-doi="https://doi.org/10.1016/j.tafmec.2025.105175"
-     data-desc="Developed three-dimensional XFEM-based cohesive segment models to simulate fracture behaviour in standard ASTM E1820 specimen geometries — Single Edge Notched Tension (SENT), Single Edge Notched Bending (SENB), and Compact Tension (CT)."
-     data-focus="XFEM · cohesive zone model · SENT · SENB · CT specimens · ASTM E1820 · J-integral · CTOD · crack tip constraint · side-groove effect · API X70 · pipeline integrity">
-     <div class="proj-accent"></div>
-     <div class="proj-header">
-       <div class="proj-header-left">
-        <div class="proj-tag">Fracture Mechanics · XFEM</div>
-        <div class="proj-title">Fracture Mechanics Modelling and Analysis of Pipeline Steel Using XFEM-Based Cohesive Segments</div>
-        <div class="proj-tools">Abaqus · XFEM · Python · SENT · SENB · CT</div>
-       </div>
-       <div class="proj-toggle">
-       <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-      </div>
-     </div>
-  </div>
+        <!-- ── PROJECT 4 ── -->
+        <div class="proj-card"
+             data-tag="Fracture Mechanics · XFEM"
+             data-title="Fracture Mechanics Modelling and Analysis of Pipeline Steel Using XFEM-Based Cohesive Segments"
+             data-tools="Abaqus · XFEM · Python · Fracture Mechanics · SENT · SENB · CT Specimens"
+             data-img="img-proj-xfem-sent.jpg"
+             data-doi="https://doi.org/10.1016/j.tafmec.2025.105175"
+             data-desc="Developed three-dimensional XFEM-based cohesive segment models to simulate fracture behaviour in standard ASTM E1820 specimen geometries — Single Edge Notched Tension (SENT), Single Edge Notched Bending (SENB), and Compact Tension (CT) — applied to API X70 pipeline steel. The XFEM-based cohesive segments approach uses a traction-separation law with maximum principal strain (Maxpe) as the damage initiation criterion, allowing crack propagation to be simulated without mesh refinement. Models were validated against experimental Force–CMOD and CTOD–Δa resistance curves. J-integral and CTOD resistance curves were derived for plain-sided and side-grooved configurations with varying initial crack depths (a/W = 0.25 to 0.50). Three J-integral evaluation methods were systematically compared: the incremental unloading compliance (CANMET) method, the CTOD-converted method, and a surface strain-based XFEM method implemented via a custom Python post-processing script. Results showed that side-grooved specimens yield 3–10% lower CTOD values due to enhanced crack-tip constraint, shallow cracks exhibit up to 13% higher J-integral values than deep cracks, and the surface strain-based method produces results consistent with standardised procedures for crack extensions below 1 mm."
+             data-focus="XFEM · cohesive zone model · SENT · SENB · CT specimens · ASTM E1820 · J-integral · CTOD · crack tip constraint · side-groove effect · API X70 · pipeline integrity">
+          <div class="proj-accent"></div>
+          <div class="proj-header">
+            <div class="proj-header-left">
+              <div class="proj-tag">Fracture Mechanics · XFEM</div>
+              <div class="proj-title">Fracture Mechanics Modelling and Analysis of Pipeline Steel Using XFEM-Based Cohesive Segments</div>
+              <div class="proj-tools">Abaqus · XFEM · Python · SENT · SENB · CT</div>
+            </div>
+            <div class="proj-toggle">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+        </div>
 
         <!-- ── PROJECT 5 ── -->
         <div class="proj-card"
@@ -493,27 +489,6 @@
 
         <!-- ── PROJECT 6 ── -->
         <div class="proj-card"
-             data-tag="Mechanical Design · Manufacturing"
-             data-title="Mechanical Design for Manufacturing Applications"
-             data-tools="SolidWorks · AutoCAD · CATIA V5"
-             data-img="img-proj-mech-design.jpg"
-             data-desc="Designed industrial machinery components and injection molds for automotive interior applications with emphasis on functionality, manufacturability, and structural reliability. Applied GD&T standards and DFM principles throughout the design lifecycle to reduce production cost and improve part quality."
-             data-focus="DFM · GD&T · injection molding · industrial machinery · tooling design · automotive">
-          <div class="proj-accent"></div>
-          <div class="proj-header">
-            <div class="proj-header-left">
-              <div class="proj-tag">Mechanical Design · Manufacturing</div>
-              <div class="proj-title">Mechanical Design for Manufacturing Applications</div>
-              <div class="proj-tools">SolidWorks · AutoCAD · CATIA V5</div>
-            </div>
-            <div class="proj-toggle">
-              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── PROJECT 7 ── -->
-        <div class="proj-card"
              data-tag="Thermal Engineering · ML"
              data-title="Surrogate Physics-Informed Model for Optimal Design of Lattice-Based Heat Exchangers"
              data-tools="Python · Physics-Informed ML · CFD · Lattice Design"
@@ -533,7 +508,7 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 8 ── -->
+        <!-- ── PROJECT 7 ── -->
         <div class="proj-card"
              data-tag="Data Analysis · Environment"
              data-title="Air Quality Prediction in Beijing: A Temporal Data Analysis"
@@ -554,7 +529,7 @@
           </div>
         </div>
 
-        <!-- ── PROJECT 9 ── -->
+        <!-- ── PROJECT 8 ── -->
         <div class="proj-card"
              data-tag="Design Optimisation · Aerospace"
              data-title="Optimising Turbine Blade Design: Integrating Topology Optimisation and Material Selection"
@@ -584,17 +559,18 @@
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-box" id="modalBox">
       <button class="modal-close" id="modalClose" aria-label="Close">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
       <div class="modal-accent"></div>
-      <div class="modal-img-wrap" id="modalImgWrap">
-        <img id="modalImg" src="" alt="" />
-      </div>
+      <div class="modal-img-wrap" id="modalImgWrap"></div>
       <div class="modal-content">
-        <div class="modal-tag"   id="modalTag"></div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-tools" id="modalTools"></div>
-        <p   class="modal-desc"  id="modalDesc"></p>
+        <div class="modal-tag"    id="modalTag"></div>
+        <div class="modal-title"  id="modalTitle"></div>
+        <div class="modal-tools"  id="modalTools"></div>
+        <p   class="modal-desc"   id="modalDesc"></p>
         <div class="modal-focus">
           <strong>Focus:</strong> <span id="modalFocus"></span>
         </div>
@@ -626,7 +602,6 @@
     const modal        = document.getElementById('projModal');
     const backdrop     = document.getElementById('modalBackdrop');
     const closeBtn     = document.getElementById('modalClose');
-    const modalImg     = document.getElementById('modalImg');
     const modalImgWrap = document.getElementById('modalImgWrap');
     const modalTag     = document.getElementById('modalTag');
     const modalTitle   = document.getElementById('modalTitle');
@@ -638,13 +613,14 @@
 
     function openModal(card) {
       const d = card.dataset;
+
       modalTag.textContent   = d.tag   || '';
       modalTitle.textContent = d.title || '';
       modalTools.textContent = d.tools || '';
       modalDesc.textContent  = d.desc  || '';
       modalFocus.textContent = d.focus || '';
 
-      /* DOI link — only show if data-doi is set */
+      /* DOI link */
       if (d.doi) {
         modalDoi.href = d.doi;
         modalDoiWrap.classList.add('visible');
@@ -652,16 +628,23 @@
         modalDoiWrap.classList.remove('visible');
       }
 
-      /* Image */
+      /* ── IMAGE: destroy and recreate every time to prevent onerror bleed ── */
       modalImgWrap.classList.remove('no-img');
-      modalImg.style.display = 'block';
-      modalImg.src = d.img || '';
-      modalImg.alt = d.title || '';
-      modalImg.onerror = () => {
+      modalImgWrap.innerHTML = '';
+
+      if (d.img) {
+        const img = document.createElement('img');
+        img.alt = d.title || '';
+        img.onerror = function () {
+          modalImgWrap.classList.add('no-img');
+          modalImgWrap.textContent = 'No image uploaded yet';
+        };
+        img.src = d.img;
+        modalImgWrap.appendChild(img);
+      } else {
         modalImgWrap.classList.add('no-img');
-        modalImg.style.display = 'none';
         modalImgWrap.textContent = 'No image uploaded yet';
-      };
+      }
 
       modal.classList.add('active');
       document.body.classList.add('modal-open');
